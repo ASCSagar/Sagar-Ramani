@@ -24,7 +24,7 @@ export default function ContactPage() {
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10 xl:px-12">
       <PageHeader
         eyebrow="Get in Touch"
         title="Contact"

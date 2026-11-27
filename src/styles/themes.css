@@ -1,0 +1,150 @@
+/* ==========================================================================
+   PORTFOLIO DESIGN SYSTEM — THEMES & COLOR SYSTEM
+   Dark Canvas (#0C0C0C), Light Ivory (#F2F0EB), Neon Lime (#D0FF35)
+   High text contrast, WCAG AAA compliance, cross-theme consistency
+   ========================================================================== */
+
+:root {
+  /* Default: Light Palette (Ivory Canvas) */
+  --background: #F2F0EB;
+  --foreground: #0C0C0C;
+  --canvas: #F2F0EB;
+  --surface: #FAF9F6;
+  --surface-elevated: #FFFFFF;
+  --foreground-secondary: #3D3D3D;
+  --muted: #EAE7E1;
+  --muted-foreground: #525252;
+  --border: #D6D3CE;
+  --border-strong: #A8A5A0;
+  --accent: #D0FF35;
+  --accent-foreground: #0C0C0C;
+  --accent-hover: #BDEB28;
+  --accent-active: #ACD91E;
+  --accent-text: #3D5200;
+  --focus-ring: #0C0C0C;
+
+  /* Functional / Status Colors */
+  --success: #15803d;
+  --warning: #b45309;
+  --destructive: #b91c1c;
+  --info: #0369a1;
+
+  /* shadcn/ui Compatibility Mapping */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface-elevated);
+  --popover-foreground: var(--foreground);
+  --primary: #0C0C0C;
+  --primary-foreground: #F2F0EB;
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --input: var(--border);
+  --ring: var(--focus-ring);
+}
+
+.dark {
+  /* Dark Palette (Near-black Canvas) */
+  --background: #0C0C0C;
+  --foreground: #F2F0EB;
+  --canvas: #0C0C0C;
+  --surface: #171717;
+  --surface-elevated: #1F1F1F;
+  --foreground-secondary: #B5B5B5;
+  --muted: #171717;
+  --muted-foreground: #9E9E9E;
+  --border: #292929;
+  --border-strong: #444444;
+  --accent: #D0FF35;
+  --accent-foreground: #0C0C0C;
+  --accent-hover: #BDEB28;
+  --accent-active: #ACD91E;
+  --accent-text: #D0FF35;
+  --focus-ring: #D0FF35;
+
+  /* Functional / Status Colors */
+  --success: #22c55e;
+  --warning: #facc15;
+  --destructive: #ef4444;
+  --info: #38bdf8;
+
+  /* shadcn/ui Compatibility Mapping */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface-elevated);
+  --popover-foreground: var(--foreground);
+  --primary: #D0FF35;
+  --primary-foreground: #0C0C0C;
+  --secondary: #1F1F1F;
+  --secondary-foreground: #F2F0EB;
+  --input: #292929;
+  --ring: var(--focus-ring);
+}
+
+/* ==========================================================================
+   SECTION-LEVEL THEME OVERRIDES
+   Allows explicit dark or light sections regardless of root theme
+   ========================================================================== */
+
+[data-section-theme="dark"] {
+  --background: #0C0C0C;
+  --foreground: #F2F0EB;
+  --canvas: #0C0C0C;
+  --surface: #171717;
+  --surface-elevated: #1F1F1F;
+  --foreground-secondary: #B5B5B5;
+  --muted: #171717;
+  --muted-foreground: #9E9E9E;
+  --border: #292929;
+  --border-strong: #444444;
+  --accent: #D0FF35;
+  --accent-foreground: #0C0C0C;
+  --accent-hover: #BDEB28;
+  --accent-active: #ACD91E;
+  --accent-text: #D0FF35;
+  --focus-ring: #D0FF35;
+  --card: #171717;
+  --card-foreground: #F2F0EB;
+  --popover: #1F1F1F;
+  --popover-foreground: #F2F0EB;
+  --primary: #D0FF35;
+  --primary-foreground: #0C0C0C;
+  --secondary: #1F1F1F;
+  --secondary-foreground: #F2F0EB;
+  --input: #292929;
+  --ring: #D0FF35;
+
+  background-color: #0C0C0C;
+  color: #F2F0EB;
+}
+
+[data-section-theme="light"] {
+  --background: #F2F0EB;
+  --foreground: #0C0C0C;
+  --canvas: #F2F0EB;
+  --surface: #FAF9F6;
+  --surface-elevated: #FFFFFF;
+  --foreground-secondary: #3D3D3D;
+  --muted: #EAE7E1;
+  --muted-foreground: #525252;
+  --border: #D6D3CE;
+  --border-strong: #A8A5A0;
+  --accent: #D0FF35;
+  --accent-foreground: #0C0C0C;
+  --accent-hover: #BDEB28;
+  --accent-active: #ACD91E;
+  --accent-text: #3D5200;
+  --focus-ring: #0C0C0C;
+  --card: #FAF9F6;
+  --card-foreground: #0C0C0C;
+  --popover: #FFFFFF;
+  --popover-foreground: #0C0C0C;
+  --primary: #0C0C0C;
+  --primary-foreground: #F2F0EB;
+  --secondary: #FAF9F6;
+  --secondary-foreground: #0C0C0C;
+  --input: #D6D3CE;
+  --ring: #0C0C0C;
+
+  background-color: #F2F0EB;
+  color: #0C0C0C;
+}

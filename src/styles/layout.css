@@ -1,0 +1,80 @@
+/* ==========================================================================
+   PORTFOLIO V3 DESIGN SYSTEM — RESPONSIVE LAYOUT & SPACING
+   Wide, standard and reading containers, fluid gutters, editorial grid
+   ========================================================================== */
+
+:root {
+  /* Container Widths */
+  --container-max: 1680px;
+  --container-wide: 1600px;
+  --container-std: 1360px;
+  --container-reading: 760px;
+
+  /* Fluid Horizontal Page Gutter */
+  --page-gutter: clamp(1rem, 3vw, 3rem);
+
+  /* Fluid Vertical Section Spacing */
+  --section-spacing: clamp(4rem, 9vw, 10rem);
+  --section-spacing-compact: clamp(2.5rem, 5vw, 5rem);
+
+  /* Grid Gap */
+  --grid-gap: clamp(1rem, 2vw, 2rem);
+  --header-height: 4.5rem;
+}
+
+/* Reusable Container Utilities */
+.container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.container-std {
+  width: 100%;
+  max-width: var(--container-std);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.container-reading {
+  width: 100%;
+  max-width: var(--container-reading);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.section-spacing {
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+}
+
+.section-spacing-compact {
+  padding-top: var(--section-spacing-compact);
+  padding-bottom: var(--section-spacing-compact);
+}
+
+/* Editorial Grid Layouts */
+.grid-editorial-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+.grid-editorial-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
+}
+
+@media (min-width: 1024px) {
+  .grid-editorial-split {
+    grid-template-columns: 5fr 7fr;
+  }
+}

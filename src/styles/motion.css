@@ -1,0 +1,30 @@
+/* ==========================================================================
+   PORTFOLIO V3 DESIGN SYSTEM — MOTION FOUNDATION
+   Centralized motion tokens and accessibility transitions
+   ========================================================================== */
+
+.transition-standard {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-standard);
+}
+
+.transition-expressive {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-expressive);
+}
+
+.transition-fast {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transition-standard,
+  .transition-expressive,
+  .transition-fast {
+    transition-duration: 0.01ms !important;
+  }
+}

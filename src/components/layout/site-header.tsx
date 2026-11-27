@@ -52,25 +52,25 @@ export function SiteHeader() {
           : "border-border/60 bg-background/80 backdrop-blur-md"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10 xl:px-12">
         <Link
           href="/"
           className="group inline-flex items-center gap-2.5 rounded-lg py-1 outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <span className="flex size-8 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 font-heading text-xs font-semibold tracking-wider text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+          <span className="flex size-8 items-center justify-center rounded-lg border border-primary/40 bg-primary/15 font-display text-xs font-bold tracking-wider text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
             {siteConfig.shortName}
           </span>
           <span className="flex flex-col leading-none">
-            <span className="font-heading text-sm font-semibold tracking-tight text-foreground">
+            <span className="font-display text-sm font-semibold tracking-tight text-foreground">
               {siteConfig.name}
             </span>
-            <span className="hidden text-[11px] text-muted-foreground sm:inline">
+            <span className="hidden text-[11px] font-mono text-muted-foreground sm:inline">
               {siteConfig.designation}
             </span>
           </span>
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-1 font-body lg:flex">
           {siteConfig.navItems.map((item) => {
             const active = isActiveRoute(pathname, item.href);
             return (
@@ -79,10 +79,10 @@ export function SiteHeader() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   active
-                    ? "text-primary"
-                    : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                    ? "text-primary font-semibold"
+                    : "text-muted-foreground hover:bg-surface hover:text-foreground"
                 )}
               >
                 {active ? (
@@ -124,7 +124,7 @@ export function SiteHeader() {
                 <SheetTitle>{siteConfig.name}</SheetTitle>
                 <SheetDescription>{siteConfig.designation}</SheetDescription>
               </SheetHeader>
-              <nav aria-label="Mobile navigation" className="flex flex-col gap-1 px-4 py-2">
+              <nav aria-label="Mobile navigation" className="flex flex-col gap-1 px-4 py-2 font-body">
                 {siteConfig.navItems.map((item) => {
                   const active = isActiveRoute(pathname, item.href);
                   return (

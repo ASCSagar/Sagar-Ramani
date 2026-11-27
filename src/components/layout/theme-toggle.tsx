@@ -27,7 +27,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       role="group"
       aria-label="Color theme"
       className={cn(
-        "inline-flex items-center rounded-full border border-border bg-card/80 p-0.5 backdrop-blur-sm",
+        "inline-flex items-center rounded-full border border-border/80 bg-card/80 p-0.5 backdrop-blur-sm",
         className
       )}
     >
@@ -42,7 +42,7 @@ export function ThemeToggle({ className }: { className?: string }) {
             aria-pressed={isActive}
             data-theme-option={value}
             className={cn(
-              "inline-flex size-7 items-center justify-center rounded-full text-xs transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "inline-flex size-7 items-center justify-center rounded-full text-xs font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
               isActive
                 ? "bg-primary text-primary-foreground shadow-xs"
                 : "text-muted-foreground hover:text-foreground"

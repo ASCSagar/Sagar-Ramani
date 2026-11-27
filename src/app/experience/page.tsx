@@ -57,7 +57,7 @@ export default function ExperiencePage() {
   });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10 xl:px-12">
       <PageHeader
         eyebrow="Career Timeline"
         title="Professional Experience"
@@ -69,13 +69,13 @@ export default function ExperiencePage() {
         <div data-stagger-item>
           <SpotlightCard className="h-full">
             <CardContent className="space-y-1 py-5">
-              <p className="font-mono text-xs tracking-wider text-primary uppercase">
+              <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
                 Calculated Total Tenure
               </p>
-              <p className="font-heading text-2xl font-semibold text-foreground">
+              <p className="font-heading text-2xl font-bold tracking-tight text-foreground">
                 {totalCareerDuration}
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="font-body text-xs leading-relaxed text-muted-foreground">
                 Computed from confirmed start and end dates
               </p>
             </CardContent>
@@ -85,13 +85,13 @@ export default function ExperiencePage() {
         <div data-stagger-item>
           <SpotlightCard className="h-full">
             <CardContent className="space-y-1 py-5">
-              <p className="font-mono text-xs tracking-wider text-primary uppercase">
+              <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
                 Employers & Progression
               </p>
-              <p className="font-heading text-2xl font-semibold text-foreground">
+              <p className="font-heading text-2xl font-bold tracking-tight text-foreground">
                 {experienceData.length} Companies · {totalRoles} Roles
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="font-body text-xs leading-relaxed text-muted-foreground">
                 Trainee → Software Developer → React Developer → FSD Grade 2
               </p>
             </CardContent>
@@ -101,11 +101,11 @@ export default function ExperiencePage() {
         <div data-stagger-item>
           <SpotlightCard className="h-full">
             <CardContent className="space-y-1 py-5">
-              <p className="font-mono text-xs tracking-wider text-primary uppercase">
+              <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
                 Employment Timeline Span
               </p>
-              <p className="font-heading text-2xl font-semibold text-foreground">2022 – 2026</p>
-              <p className="text-xs text-muted-foreground">
+              <p className="font-heading text-2xl font-bold tracking-tight text-foreground">2022 – 2026</p>
+              <p className="font-body text-xs leading-relaxed text-muted-foreground">
                 All listed tenures are completed historical roles
               </p>
             </CardContent>

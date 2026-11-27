@@ -25,7 +25,7 @@ export function PageHeader({
       {backHref && backLabel ? (
         <Link
           href={backHref}
-          className="inline-flex items-center gap-1.5 rounded text-xs font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex items-center gap-1.5 rounded-full font-body text-xs font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         >
           <ArrowLeft className="size-3.5" aria-hidden="true" />
           {backLabel}
@@ -41,9 +41,9 @@ export function PageHeader({
           text={title}
           immediate
           duration={MOTION_DURATIONS.reveal}
-          className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
         />
-        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{description}</p>
+        <p className="max-w-2xl font-body text-base leading-relaxed text-muted-foreground">{description}</p>
       </div>
     </header>
   );

@@ -109,7 +109,7 @@ export function HomeSections() {
   return (
     <div className="space-y-20 pb-24">
       {/* Professional Statistics */}
-      <section aria-labelledby="stats-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="stats-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
         <h2 id="stats-heading" className="sr-only">
           Professional Statistics
         </h2>
@@ -118,13 +118,13 @@ export function HomeSections() {
             <div key={stat.label} data-stagger-item>
               <SpotlightCard className="h-full">
                 <CardContent className="space-y-1.5 py-5">
-                  <p className="font-mono text-xs tracking-wider text-primary uppercase">
+                  <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
                     {stat.label}
                   </p>
-                  <p className="font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                  <p className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                     <AnimatedCounter value={stat.value} />
                   </p>
-                  <p className="text-xs leading-relaxed text-muted-foreground">{stat.detail}</p>
+                  <p className="font-body text-xs leading-relaxed text-muted-foreground">{stat.detail}</p>
                 </CardContent>
               </SpotlightCard>
             </div>
@@ -133,7 +133,7 @@ export function HomeSections() {
       </section>
 
       {/* About Me Overview */}
-      <section aria-labelledby="about-overview-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="about-overview-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
         <SectionHeading
           id="about-overview-heading"
           eyebrow="About Me"
@@ -206,7 +206,7 @@ export function HomeSections() {
       <HorizontalProjectShowcase items={showcaseItems} />
 
       {/* Featured Technology Stack */}
-      <section aria-labelledby="featured-stack-heading" className="mx-auto max-w-6xl space-y-6 px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="featured-stack-heading" className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 lg:px-10 xl:px-12">
         <SectionHeading
           id="featured-stack-heading"
           eyebrow="Technology Stack"
@@ -244,7 +244,7 @@ export function HomeSections() {
       </section>
 
       {/* Experience & Education Preview */}
-      <section aria-labelledby="experience-education-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="experience-education-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
         <SectionHeading
           id="experience-education-heading"
           eyebrow="Background"
@@ -345,7 +345,7 @@ export function HomeSections() {
       </section>
 
       {/* Professional Strengths */}
-      <section aria-labelledby="strengths-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="strengths-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
         <SectionHeading
           id="strengths-heading"
           eyebrow="Engineering Strengths"
@@ -375,7 +375,7 @@ export function HomeSections() {
       </section>
 
       {/* Résumé Center Preview */}
-      <section aria-labelledby="resume-preview-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="resume-preview-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
         <ScrollReveal>
           <SpotlightCard>
             <div className="py-5">
@@ -417,7 +417,7 @@ export function HomeSections() {
 
       {/* Testimonials: strictly gated behind showTestimonials && verifiedForPublication */}
       {visibleTestimonials.length > 0 ? (
-        <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section aria-labelledby="testimonials-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
           <SectionHeading
             id="testimonials-heading"
             eyebrow="Endorsements"
@@ -437,21 +437,21 @@ export function HomeSections() {
       ) : null}
 
       {/* Contact Call-to-Action */}
-      <section aria-labelledby="contact-cta-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="contact-cta-heading" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 xl:px-12">
         <ScrollReveal>
-          <Card className="border-primary/30 bg-primary/5">
+          <Card className="border-border/80 bg-surface/70">
             <CardContent className="flex flex-col justify-between gap-6 py-8 md:flex-row md:items-center">
               <div className="space-y-2">
-                <p className="font-mono text-xs tracking-wider text-primary uppercase">
+                <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
                   Contact & Collaboration
                 </p>
                 <SplitTextReveal
                   as="h2"
                   id="contact-cta-heading"
                   text="Let’s Discuss Engineering & Product Architecture"
-                  className="font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+                  className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
                 />
-                <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                <p className="max-w-2xl font-body text-sm sm:text-base leading-relaxed text-muted-foreground">
                   Reach out via the validated contact form or connect directly through email, LinkedIn, or GitHub.
                 </p>
                 <div className="flex flex-wrap items-center gap-4 pt-1 text-xs text-muted-foreground">

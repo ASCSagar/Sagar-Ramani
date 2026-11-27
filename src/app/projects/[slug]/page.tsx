@@ -111,7 +111,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   ]);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10 xl:px-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -148,9 +148,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             text={project.title}
             immediate
             duration={MOTION_DURATIONS.reveal}
-            className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+            className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           />
-          <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">
+          <p className="max-w-3xl font-body text-base sm:text-lg leading-relaxed text-muted-foreground">
             {project.shortDescription}
           </p>
         </div>

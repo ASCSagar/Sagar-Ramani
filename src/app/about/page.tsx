@@ -79,7 +79,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10 xl:px-12">
       <PageHeader
         eyebrow="About"
         title={profileData.name}
@@ -225,14 +225,14 @@ export default function AboutPage() {
         {/* Engineering Pillars */}
         <section aria-labelledby="engineering-pillars-heading" className="space-y-6">
           <div>
-            <p className="font-mono text-xs tracking-wider text-primary uppercase">
+            <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
               Engineering Focus
             </p>
             <SplitTextReveal
               as="h2"
               id="engineering-pillars-heading"
               text="Technical Expertise & Engineering Philosophy"
-              className="mt-1 font-heading text-2xl font-semibold tracking-tight text-foreground"
+              className="mt-1 font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
             />
           </div>
 

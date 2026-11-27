@@ -21,7 +21,7 @@ export const metadata = buildPageMetadata({
 
 export default function EducationPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10 xl:px-12">
       <PageHeader
         eyebrow="Academic Background"
         title="Education"
@@ -53,7 +53,7 @@ export default function EducationPage() {
                         {entry.degree}
                         {entry.specialization ? ` (${entry.specialization})` : ""}
                       </CardTitle>
-                      <CardDescription className="text-sm font-medium text-foreground/85">
+                      <CardDescription className="font-body text-sm font-medium text-foreground-secondary">
                         {entry.institution}
                       </CardDescription>
                     </div>
@@ -70,7 +70,7 @@ export default function EducationPage() {
                   </CardHeader>
 
                   <CardContent className="space-y-3 pt-4">
-                    <p className="text-sm leading-relaxed text-muted-foreground">{entry.summary}</p>
+                    <p className="font-body text-sm leading-relaxed text-muted-foreground">{entry.summary}</p>
                     {entry.location ? (
                       <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                         <MapPin className="size-3.5 text-primary" aria-hidden="true" />

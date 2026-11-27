@@ -13,7 +13,7 @@ export const metadata = buildPageMetadata({
 
 export default function SkillsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-10 xl:px-12">
       <PageHeader
         eyebrow="Capabilities"
         title="Technical Skills"

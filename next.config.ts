@@ -20,6 +20,9 @@ const contentSecurityPolicy = `
 const isProduction = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    cpus: 2,
+  },
   transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
   turbopack: {
     rules: {

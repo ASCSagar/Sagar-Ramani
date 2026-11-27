@@ -95,22 +95,22 @@ export function HorizontalProjectShowcase({ items }: HorizontalProjectShowcasePr
       ref={sectionRef}
       aria-labelledby="featured-projects-heading"
       data-testid="horizontal-project-showcase"
-      className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8"
+      className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-10 xl:px-12"
     >
       <div ref={pinContainerRef} className="space-y-6">
         {/* Showcase Header */}
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div className="space-y-1.5">
-            <p className="font-mono text-xs tracking-wider text-primary uppercase">
+            <p className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase">
               Featured Showcase
             </p>
             <SplitTextReveal
               as="h2"
               id="featured-projects-heading"
               text="Platforms & Production Applications"
-              className="font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+              className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
             />
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            <p className="max-w-2xl font-body text-sm sm:text-base leading-relaxed text-muted-foreground">
               Selected verified enterprise platforms, AI-enabled systems, and web applications with grouped module architecture.
             </p>
           </div>

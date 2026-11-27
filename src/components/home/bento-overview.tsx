@@ -10,12 +10,14 @@ import { StaggerReveal } from "@/components/animations/scroll-reveal";
 import { SplitTextReveal } from "@/components/animations/split-text-reveal";
 import { SpotlightCard, TiltCard } from "@/components/effects/spotlight-card";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { MOTION_VARIANTS } from "@/config/motion";
 import { educationData } from "@/data/education";
 import { experienceData } from "@/data/experience";
 import { profileData } from "@/data/profile";
 import { getTopLevelProjects } from "@/data/projects";
 import { skillsData } from "@/data/skills";
+import { cn } from "@/lib/utils";
 
 export function BentoOverview() {
   const featuredProjects = getTopLevelProjects().filter((project) => project.featured);
@@ -24,26 +26,26 @@ export function BentoOverview() {
   return (
     <section
       aria-labelledby="overview-heading"
-      className="mx-auto max-w-6xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16 sm:pb-24 lg:px-8"
+      className="mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16 sm:pb-24 lg:px-10 xl:px-12"
     >
       <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div className="space-y-2">
-          <p className="font-mono text-xs tracking-wider text-primary uppercase">
+          <p className="font-mono text-xs tracking-wider text-accent-highlight uppercase">
             Engineering Overview
           </p>
           <SplitTextReveal
             as="h2"
             id="overview-heading"
             text="Verified Portfolio Snapshot"
-            className="font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
+            className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
           />
-          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="max-w-xl font-body text-sm sm:text-base leading-relaxed text-muted-foreground">
             Structured across confirmed experience, projects, skills, and education.
           </p>
         </div>
         <Link
           href="/projects"
-          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-lg border border-border bg-card/60 px-3.5 py-2 text-xs font-medium text-foreground transition-colors outline-none hover:border-primary/40 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card/60 px-4 py-2 font-body text-xs font-medium text-foreground transition-colors outline-none hover:border-primary/40 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring"
         >
           Explore All Work
           <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -307,7 +309,7 @@ export function BentoOverview() {
                 <MagneticButton className="w-full">
                   <Link
                     href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-xs focus-visible:ring-2 focus-visible:ring-ring"
+                    className={cn(buttonVariants({ variant: "default", size: "default" }), "w-full")}
                   >
                     Open Contact Form
                     <ArrowRight className="size-3.5" aria-hidden="true" />

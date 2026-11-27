@@ -8,16 +8,16 @@ import { siteConfig } from "@/data/site-config";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/70 bg-card/40 print:hidden">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <footer className="border-t border-border/70 bg-surface/50 font-body print:hidden">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-10 xl:px-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
           <div className="space-y-3 md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <span className="flex size-8 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 font-heading text-xs font-semibold tracking-wider text-primary">
+              <span className="flex size-8 items-center justify-center rounded-lg border border-primary/40 bg-primary/15 font-display text-xs font-bold tracking-wider text-primary">
                 {siteConfig.shortName}
               </span>
               <div>
-                <p className="font-heading text-sm font-semibold text-foreground">
+                <p className="font-display text-sm font-semibold text-foreground">
                   {siteConfig.name}
                 </p>
                 <p className="text-xs text-muted-foreground">{siteConfig.designation}</p>
@@ -33,7 +33,7 @@ export function SiteFooter() {
           </div>
 
           <div className="md:col-span-3 lg:col-span-4">
-            <h2 className="font-heading text-xs font-semibold tracking-wider text-foreground uppercase">
+            <h2 className="font-heading text-xs font-bold tracking-wider text-foreground uppercase">
               Navigation
             </h2>
             <ul className="mt-3 grid grid-cols-2 gap-2 text-sm">
@@ -51,7 +51,7 @@ export function SiteFooter() {
           </div>
 
           <div className="min-w-0 md:col-span-4 lg:col-span-3">
-            <h2 className="font-heading text-xs font-semibold tracking-wider text-foreground uppercase">
+            <h2 className="font-heading text-xs font-bold tracking-wider text-foreground uppercase">
               Connect
             </h2>
             <ul className="mt-3 space-y-2.5 text-sm">

@@ -38,7 +38,7 @@ export function SpotlightCard({
       ref={cardRef}
       onPointerMove={handlePointerMove}
       className={cn(
-        "group/spotlight relative overflow-hidden rounded-2xl border border-border/80 bg-card/60 transition-colors duration-200 hover:border-primary/40 [--card-spacing:--spacing(5)] sm:[--card-spacing:--spacing(6)]",
+        "group/spotlight font-body relative overflow-hidden rounded-2xl border border-border/80 bg-card/75 backdrop-blur-xs transition-colors duration-200 hover:border-primary/40 [--card-spacing:--spacing(5)] sm:[--card-spacing:--spacing(6)]",
         className
       )}
     >

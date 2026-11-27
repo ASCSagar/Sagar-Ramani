@@ -49,12 +49,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className="h-full antialiased font-sans"
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        />
         <JsonLd data={buildPersonJsonLd()} />
         <JsonLd data={buildWebSiteJsonLd()} />
       </head>
       <body
         suppressHydrationWarning
-        className="flex min-h-full flex-col bg-background text-foreground"
+        className="flex min-h-full flex-col bg-background text-foreground font-body"
       >
         <ThemeProvider
           attribute="class"
@@ -69,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <CustomCursor />
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none"
             >
               Skip to main content
             </a>
