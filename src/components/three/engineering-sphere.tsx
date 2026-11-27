@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/providers/theme-provider";
 import * as THREE from "three";
 
 import { ParticleField } from "@/components/three/particle-field";
@@ -11,13 +11,58 @@ import { SceneLighting } from "@/components/three/scene-lighting";
 import { Badge } from "@/components/ui/badge";
 import { THREE_QUALITY_PRESETS, type MotionQualityTier } from "@/config/motion";
 
+export interface SpherePalette {
+  primaryNode: string;
+  secondaryNode: string;
+  connectingLines: string;
+  orbitalRings: string;
+  particles: string;
+  glowColor: string;
+  nodeEmissiveIntensity: number;
+  linesOpacity: number;
+  ringsOpacity: number;
+  particlesOpacity: number;
+  coreOpacity: number;
+  outerWireframeOpacity: number;
+}
+
+const DARK_SPHERE_PALETTE: SpherePalette = {
+  primaryNode: "#CCFF33",
+  secondaryNode: "#849E26",
+  connectingLines: "#46551C",
+  orbitalRings: "#667A25",
+  particles: "#A3B85C",
+  glowColor: "#CCFF33",
+  nodeEmissiveIntensity: 0.32,
+  linesOpacity: 0.44,
+  ringsOpacity: 0.42,
+  particlesOpacity: 0.42,
+  coreOpacity: 0.52,
+  outerWireframeOpacity: 0.24,
+};
+
+const LIGHT_SPHERE_PALETTE: SpherePalette = {
+  primaryNode: "#5E7814",
+  secondaryNode: "#789620",
+  connectingLines: "#46551C",
+  orbitalRings: "#667A25",
+  particles: "#6D822A",
+  glowColor: "#789620",
+  nodeEmissiveIntensity: 0.16,
+  linesOpacity: 0.52,
+  ringsOpacity: 0.48,
+  particlesOpacity: 0.35,
+  coreOpacity: 0.48,
+  outerWireframeOpacity: 0.28,
+};
+
 interface SphereRigProps {
-  primaryColor: string;
-  secondaryColor: string;
+  palette: SpherePalette;
+  isDark: boolean;
   qualityTier: Exclude<MotionQualityTier, "reduced">;
 }
 
-function SphereRig({ primaryColor, secondaryColor, qualityTier }: SphereRigProps) {
+function SphereRig({ palette, isDark, qualityTier }: SphereRigProps) {
   const preset = THREE_QUALITY_PRESETS[qualityTier];
   const groupRef = useRef<THREE.Group>(null);
   const ringOneRef = useRef<THREE.Mesh>(null);
@@ -99,58 +144,71 @@ function SphereRig({ primaryColor, secondaryColor, qualityTier }: SphereRigProps
   } = useMemo(() => {
     return {
       outerMaterial: new THREE.MeshBasicMaterial({
-        color: primaryColor,
+        color: palette.connectingLines,
         wireframe: true,
         transparent: true,
-        opacity: 0.34,
+        opacity: palette.outerWireframeOpacity,
       }),
       coreMaterial: new THREE.MeshStandardMaterial({
-        color: secondaryColor,
+        color: palette.secondaryNode,
+        emissive: palette.primaryNode,
+        emissiveIntensity: isDark ? 0.16 : 0.08,
         wireframe: true,
         transparent: true,
-        opacity: 0.72,
-        roughness: 0.3,
-        metalness: 0.35,
+        opacity: palette.coreOpacity,
+        roughness: 0.35,
+        metalness: 0.3,
       }),
       ringOneMaterial: new THREE.MeshBasicMaterial({
-        color: primaryColor,
+        color: palette.orbitalRings,
         transparent: true,
-        opacity: 0.42,
+        opacity: palette.ringsOpacity,
       }),
       ringTwoMaterial: new THREE.MeshBasicMaterial({
-        color: secondaryColor,
+        color: palette.orbitalRings,
         transparent: true,
-        opacity: 0.34,
+        opacity: palette.ringsOpacity * 0.75,
       }),
       nodeMaterial: new THREE.MeshStandardMaterial({
-        color: primaryColor,
-        emissive: primaryColor,
-        emissiveIntensity: 0.4,
+        color: 0xffffff,
+        emissive: palette.glowColor,
+        emissiveIntensity: palette.nodeEmissiveIntensity,
         roughness: 0.25,
-        metalness: 0.4,
+        metalness: 0.35,
+        transparent: true,
+        opacity: isDark ? 0.95 : 0.88,
       }),
       connectionsMaterial: new THREE.LineBasicMaterial({
-        color: secondaryColor,
+        color: palette.connectingLines,
         transparent: true,
-        opacity: 0.22,
+        opacity: palette.linesOpacity,
       }),
     };
-  }, [primaryColor, secondaryColor]);
+  }, [palette, isDark]);
 
   useEffect(() => {
     const instancedMesh = nodesRef.current;
     if (!instancedMesh) return;
 
     const dummy = new THREE.Object3D();
+    const primaryColorObj = new THREE.Color(palette.primaryNode);
+    const secondaryColorObj = new THREE.Color(palette.secondaryNode);
+
     nodePositions.forEach((pos, idx) => {
       dummy.position.copy(pos);
-      const scale = idx % 5 === 0 ? 1.35 : 0.9;
+      const isSelected = idx % 4 === 0;
+      const scale = isSelected ? 1.35 : 0.9;
       dummy.scale.setScalar(scale);
       dummy.updateMatrix();
       instancedMesh.setMatrixAt(idx, dummy.matrix);
+      instancedMesh.setColorAt(idx, isSelected ? primaryColorObj : secondaryColorObj);
     });
+
     instancedMesh.instanceMatrix.needsUpdate = true;
-  }, [nodePositions]);
+    if (instancedMesh.instanceColor) {
+      instancedMesh.instanceColor.needsUpdate = true;
+    }
+  }, [nodePositions, palette]);
 
   useEffect(() => {
     return () => {
@@ -254,11 +312,15 @@ function SphereRig({ primaryColor, secondaryColor, qualityTier }: SphereRigProps
 interface EngineeringSphereProps {
   onContextError?: () => void;
   qualityTier?: Exclude<MotionQualityTier, "reduced">;
+  paused?: boolean;
+  variant?: "default" | "background";
 }
 
 export default function EngineeringSphere({
   onContextError,
   qualityTier = "desktop",
+  paused = false,
+  variant = "background",
 }: EngineeringSphereProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
@@ -266,8 +328,7 @@ export default function EngineeringSphere({
   const { resolvedTheme } = useTheme();
 
   const isDark = resolvedTheme !== "light";
-  const primaryColor = isDark ? "#818cf8" : "#4f46e5";
-  const secondaryColor = isDark ? "#a78bfa" : "#7c3aed";
+  const palette = isDark ? DARK_SPHERE_PALETTE : LIGHT_SPHERE_PALETTE;
   const preset = THREE_QUALITY_PRESETS[qualityTier];
 
   useEffect(() => {
@@ -306,14 +367,20 @@ export default function EngineeringSphere({
     <div
       ref={containerRef}
       data-testid="hero-sphere-canvas"
-      data-cursor="sphere"
-      data-cursor-label="Drag 3D"
-      className="relative h-[340px] w-full overflow-hidden rounded-2xl border border-border/80 bg-card/50 sm:h-[400px] lg:h-[440px]"
+      data-cursor={variant === "background" ? undefined : "sphere"}
+      data-cursor-label={variant === "background" ? undefined : "Drag 3D"}
+      className={
+        variant === "background"
+          ? "relative h-full w-full overflow-hidden bg-transparent border-0"
+          : "relative h-[340px] w-full overflow-hidden rounded-2xl border border-border/80 bg-card/50 sm:h-[400px] lg:h-[440px]"
+      }
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,color-mix(in_oklch,var(--primary)_18%,transparent),transparent_68%)]"
-      />
+      {variant !== "background" && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,color-mix(in_oklch,var(--accent)_18%,transparent),transparent_68%)]"
+        />
+      )}
 
       <Canvas
         dpr={preset.dpr}
@@ -331,19 +398,19 @@ export default function EngineeringSphere({
         className="h-full w-full"
       >
         <SceneLighting
-          primaryColor={primaryColor}
-          secondaryColor={secondaryColor}
+          primaryColor={palette.primaryNode}
+          secondaryColor={palette.secondaryNode}
           isDark={isDark}
         />
         <SphereRig
-          primaryColor={primaryColor}
-          secondaryColor={secondaryColor}
+          palette={palette}
+          isDark={isDark}
           qualityTier={qualityTier}
         />
         <ParticleField
           count={preset.particleCount}
-          primaryColor={primaryColor}
-          secondaryColor={secondaryColor}
+          primaryColor={palette.particles}
+          secondaryColor={palette.secondaryNode}
           isDark={isDark}
         />
         <OrbitControls
@@ -355,14 +422,16 @@ export default function EngineeringSphere({
         />
       </Canvas>
 
-      <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex items-center justify-between gap-2">
-        <Badge variant="outline" className="bg-background/80 font-mono text-[11px] backdrop-blur-sm">
-          Interactive 3D · Drag to rotate
-        </Badge>
-        <Badge variant="secondary" className="bg-background/75 font-mono text-[10px] backdrop-blur-sm">
-          {preset.nodeCount} nodes
-        </Badge>
-      </div>
+      {variant !== "background" && (
+        <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex items-center justify-between gap-2">
+          <Badge variant="outline" className="bg-background/80 font-mono text-[11px] backdrop-blur-sm">
+            Interactive 3D · Drag to rotate
+          </Badge>
+          <Badge variant="secondary" className="bg-background/75 font-mono text-[10px] backdrop-blur-sm">
+            {preset.nodeCount} nodes
+          </Badge>
+        </div>
+      )}
     </div>
   );
 }

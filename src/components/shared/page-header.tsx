@@ -25,7 +25,7 @@ export function PageHeader({
       {backHref && backLabel ? (
         <Link
           href={backHref}
-          className="inline-flex items-center gap-1.5 rounded-full font-body text-xs font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex items-center gap-1.5 rounded-full font-body text-[clamp(0.8125rem,0.15vw+0.75rem,0.875rem)] font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         >
           <ArrowLeft className="size-3.5" aria-hidden="true" />
           {backLabel}
@@ -33,7 +33,7 @@ export function PageHeader({
       ) : null}
 
       <div className="space-y-3">
-        <Badge variant="outline" className="border-primary/30 bg-primary/10 font-mono text-xs text-primary">
+        <Badge variant="outline" className="border-primary/30 bg-primary/10 font-mono text-[clamp(0.6875rem,0.15vw+0.65rem,0.8125rem)] text-primary">
           {eyebrow}
         </Badge>
         <SplitTextReveal
@@ -41,9 +41,9 @@ export function PageHeader({
           text={title}
           immediate
           duration={MOTION_DURATIONS.reveal}
-          className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          className="font-heading text-[clamp(2.25rem,3.5vw+0.75rem,5rem)] font-semibold tracking-[-0.03em] text-foreground leading-[1.08]"
         />
-        <p className="max-w-2xl font-body text-base leading-relaxed text-muted-foreground">{description}</p>
+        <p className="max-w-2xl font-body text-[clamp(1rem,0.25vw+0.9375rem,1.125rem)] leading-relaxed text-muted-foreground">{description}</p>
       </div>
     </header>
   );

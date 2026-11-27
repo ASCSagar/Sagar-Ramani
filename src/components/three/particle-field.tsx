@@ -44,7 +44,7 @@ export function ParticleField({
       positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = radius * Math.cos(phi);
 
-      const mixed = c1.clone().lerp(c2, r1);
+      const mixed = c1.clone().lerp(c2, r1 * 0.35);
       colors[i * 3] = mixed.r;
       colors[i * 3 + 1] = mixed.g;
       colors[i * 3 + 2] = mixed.b;
@@ -62,8 +62,8 @@ export function ParticleField({
       depthWrite: false,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
       uniforms: {
-        uOpacity: { value: isDark ? 0.65 : 0.45 },
-        uSize: { value: 26.0 },
+        uOpacity: { value: isDark ? 0.42 : 0.28 },
+        uSize: { value: 22.0 },
       },
       vertexShader: `
         attribute vec3 color;

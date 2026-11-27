@@ -25,27 +25,28 @@ export function BentoOverview() {
 
   return (
     <section
+      id="overview"
       aria-labelledby="overview-heading"
-      className="mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16 sm:pb-24 lg:px-10 xl:px-12"
+      className="mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16 sm:pb-24 lg:px-10 xl:px-12 scroll-mt-20"
     >
       <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div className="space-y-2">
-          <p className="font-mono text-xs tracking-wider text-accent-highlight uppercase">
+          <p className="font-mono text-[clamp(0.6875rem,0.15vw+0.65rem,0.8125rem)] font-semibold tracking-wider text-accent-highlight uppercase">
             Engineering Overview
           </p>
           <SplitTextReveal
             as="h2"
             id="overview-heading"
             text="Verified Portfolio Snapshot"
-            className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
+            className="font-heading text-[clamp(2.25rem,3.5vw+0.75rem,5rem)] font-semibold tracking-[-0.03em] text-foreground leading-[1.08]"
           />
-          <p className="max-w-xl font-body text-sm sm:text-base leading-relaxed text-muted-foreground">
+          <p className="max-w-xl font-body text-[clamp(1rem,0.25vw+0.9375rem,1.125rem)] leading-relaxed text-muted-foreground">
             Structured across confirmed experience, projects, skills, and education.
           </p>
         </div>
         <Link
           href="/projects"
-          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card/60 px-4 py-2 font-body text-xs font-medium text-foreground transition-colors outline-none hover:border-primary/40 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-border/80 bg-card/60 px-4 py-2 font-body text-[clamp(0.875rem,0.2vw+0.825rem,1rem)] font-medium text-foreground transition-colors outline-none hover:border-primary/40 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring"
         >
           Explore All Work
           <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -77,10 +78,10 @@ export function BentoOverview() {
                     </Link>
                   </div>
                   <div>
-                    <h3 className="font-heading text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                    <h3 className="font-heading text-[clamp(1.25rem,0.8vw+0.65rem,1.75rem)] font-semibold tracking-[-0.018em] text-foreground leading-[1.28]">
                       Enterprise SaaS & Web Platforms
                     </h3>
-                    <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
+                    <p className="mt-1 font-body text-[clamp(0.875rem,0.15vw+0.825rem,0.9375rem)] text-muted-foreground leading-relaxed">
                       Highlights across TrueValue Platform, FlyOverseas.ai, Study Streak, and Tube Master.
                     </p>
                   </div>

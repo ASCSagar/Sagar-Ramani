@@ -9,10 +9,10 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 const levelStyles: Record<HeadingProps["level"], string> = {
-  1: "text-[clamp(2.75rem,6vw,6.5rem)] leading-[1.05] tracking-[-0.035em] font-bold",
-  2: "text-[clamp(2rem,4.5vw,4.75rem)] leading-[1.12] tracking-[-0.025em] font-semibold",
-  3: "text-[clamp(1.5rem,3vw,3rem)] leading-[1.2] tracking-[-0.02em] font-semibold",
-  4: "text-[clamp(1.125rem,1.8vw,1.75rem)] leading-[1.3] tracking-[-0.015em] font-semibold",
+  1: "text-[clamp(3.25rem,5.5vw+1rem,7rem)] leading-[1.02] tracking-[-0.038em] font-bold",        /* Hero: 80–112px */
+  2: "text-[clamp(2.25rem,3.5vw+0.75rem,5rem)] leading-[1.08] tracking-[-0.03em] font-semibold",  /* Section: 56–80px */
+  3: "text-[clamp(1.75rem,1.8vw+0.75rem,3rem)] leading-[1.18] tracking-[-0.022em] font-semibold", /* Subheading: 32–48px */
+  4: "text-[clamp(1.25rem,0.8vw+0.65rem,1.75rem)] leading-[1.28] tracking-[-0.018em] font-semibold", /* Card Title: 22–28px */
 };
 
 const defaultTag: Record<HeadingProps["level"], ElementType> = {

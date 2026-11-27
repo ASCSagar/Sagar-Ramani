@@ -1,23 +1,53 @@
 "use client";
 
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, Briefcase, Mail, MapPin } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 import { MagneticButton } from "@/components/animations/magnetic-button";
-import { SplitTextReveal } from "@/components/animations/split-text-reveal";
 import { useAnimationSettings } from "@/components/providers/animation-provider";
 import { HeroSphereWrapper } from "@/components/three/hero-sphere-wrapper";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { MOTION_DISTANCES, MOTION_DURATIONS, MOTION_EASES, MOTION_STAGGER } from "@/config/motion";
+import { MOTION_DURATIONS, MOTION_EASES } from "@/config/motion";
 import { profileData } from "@/data/profile";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { cn } from "@/lib/utils";
+
+const EYEBROW_TEXT = `${profileData.name} · ${profileData.designation} · ${profileData.experience} Experience`;
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const impactRef = useRef<HTMLSpanElement>(null);
+  const copyRef = useRef<HTMLParagraphElement>(null);
   const { shouldReduceMotion } = useAnimationSettings();
+
+  // Interactive character scramble on eyebrow
+  const handleEyebrowHover = useCallback(() => {
+    if (shouldReduceMotion || !eyebrowRef.current) return;
+    gsap.to(eyebrowRef.current, {
+      duration: 0.85,
+      scrambleText: {
+        text: EYEBROW_TEXT,
+        chars: "upperCase",
+        speed: 0.45,
+      },
+      ease: "power2.out",
+    });
+  }, [shouldReduceMotion]);
+
+  // Interactive character scramble on "impact." word
+  const handleImpactHover = useCallback(() => {
+    if (shouldReduceMotion || !impactRef.current) return;
+    gsap.to(impactRef.current, {
+      duration: 0.65,
+      scrambleText: {
+        text: "impact.",
+        chars: "01!@#$%&*",
+        speed: 0.4,
+      },
+      ease: "power2.out",
+    });
+  }, [shouldReduceMotion]);
 
   useGSAP(
     () => {
@@ -34,68 +64,87 @@ export function HeroSection() {
           },
         });
 
-        tl.from("[data-hero-badge]", {
-          y: MOTION_DISTANCES.sm,
-          opacity: 0,
-          stagger: MOTION_STAGGER.tight,
-          clearProps: "transform,opacity",
-        })
+        // 1. Eyebrow scramble entrance
+        if (eyebrowRef.current) {
+          tl.fromTo(
+            eyebrowRef.current,
+            { opacity: 0, y: 16 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1.1,
+              scrambleText: {
+                text: EYEBROW_TEXT,
+                chars: "upperCase",
+                revealDelay: 0.15,
+                speed: 0.35,
+              },
+              ease: "power2.out",
+            }
+          );
+        }
+
+        // 2. Main headline reveal
+        tl.from(
+          "[data-hero-heading]",
+          {
+            y: 36,
+            opacity: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            clearProps: "transform,opacity",
+          },
+          "-=0.6"
+        )
+          // 3. Intro copy reveal
           .from(
             "[data-hero-copy]",
             {
-              y: MOTION_DISTANCES.md,
+              y: 24,
               opacity: 0,
-              stagger: MOTION_STAGGER.base,
+              duration: 0.7,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
+            },
+            "-=0.45"
+          )
+          // 4. CTA buttons reveal
+          .from(
+            "[data-hero-cta]",
+            {
+              y: 20,
+              opacity: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out",
               clearProps: "transform,opacity",
             },
             "-=0.35"
           )
+          // 5. Scroll indicator reveal
           .from(
-            "[data-hero-chip]",
+            "[data-hero-scroll]",
             {
-              y: 10,
+              y: 16,
               opacity: 0,
-              duration: 0.4,
-              stagger: 0.035,
+              duration: 0.6,
+              ease: "power2.out",
               clearProps: "transform,opacity",
             },
-            "-=0.4"
+            "-=0.2"
           )
+          // 6. Background sphere subtle zoom-in
           .from(
-            "[data-hero-cta]",
+            "[data-hero-sphere]",
             {
-              y: MOTION_DISTANCES.sm,
+              scale: 0.88,
               opacity: 0,
-              duration: 0.45,
-              stagger: 0.06,
+              duration: 1.5,
+              ease: "power2.out",
               clearProps: "transform,opacity",
             },
-            "-=0.3"
-          )
-          .from(
-            "[data-hero-visual]",
-            {
-              scale: 0.96,
-              opacity: 0,
-              duration: MOTION_DURATIONS.cinematic,
-              ease: MOTION_EASES.gsap.expoOut,
-              clearProps: "transform,opacity",
-            },
-            0.12
+            0
           );
-      });
-
-      mm.add("(prefers-reduced-motion: no-preference) and (min-width: 1024px)", () => {
-        gsap.to("[data-hero-visual]", {
-          y: 28,
-          ease: MOTION_EASES.gsap.none,
-          scrollTrigger: {
-            trigger: scope,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.6,
-          },
-        });
       });
 
       return () => {
@@ -109,119 +158,108 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       aria-labelledby="hero-heading"
-      className="relative mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:px-10 lg:pt-20 xl:px-12"
+      className="relative flex min-h-[calc(100dvh-5rem)] w-full flex-col items-center justify-between overflow-hidden px-4 py-8 sm:px-6 sm:py-12 lg:px-8 text-center"
     >
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="space-y-6 lg:col-span-7">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span
-              data-hero-badge
-              className="font-mono text-xs font-semibold tracking-wider text-accent-highlight uppercase"
-            >
-              {profileData.designation}
-            </span>
-            <span data-hero-badge className="text-muted-foreground/60">•</span>
-            <Badge data-hero-badge variant="secondary" className="font-mono text-xs rounded-full">
-              {profileData.experience} experience
-            </Badge>
-            <span
-              data-hero-badge
-              className="inline-flex items-center gap-1 text-xs text-muted-foreground"
-            >
-              <MapPin className="size-3.5 text-accent-highlight" aria-hidden="true" />
-              {profileData.location}
-            </span>
-          </div>
+      {/* Subtle Integrated 3D Sphere Background Visual */}
+      <div
+        data-hero-sphere
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden opacity-25 dark:opacity-30 select-none"
+      >
+        <div className="relative h-[480px] w-[480px] sm:h-[620px] sm:w-[620px] lg:h-[760px] lg:w-[760px] max-w-full">
+          <HeroSphereWrapper variant="background" />
+        </div>
+      </div>
 
-          <div className="space-y-4">
-            <div data-hero-copy>
-              <SplitTextReveal
-                as="h1"
-                id="hero-heading"
-                text={profileData.name}
-                splitBy="words"
-                immediate
-                duration={MOTION_DURATIONS.cinematic}
-                className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-[4rem] lg:leading-[1.05]"
+      {/* Subtle Ambient Radial Glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_50%_45%,color-mix(in_oklch,var(--accent)_12%,transparent),transparent_65%)]"
+      />
+
+      {/* Top spacing counterbalance for true vertical centering */}
+      <div aria-hidden="true" className="h-2 sm:h-4 w-full shrink-0" />
+
+      {/* Centered Hero Content */}
+      <div className="relative z-10 my-auto flex w-full max-w-5xl flex-col items-center space-y-6 sm:space-y-8">
+        {/* Eyebrow */}
+        <div data-hero-eyebrow className="inline-flex items-center justify-center">
+          <span
+            ref={eyebrowRef}
+            onMouseEnter={handleEyebrowHover}
+            className="cursor-default font-mono text-xs sm:text-sm tracking-[0.18em] text-muted-foreground uppercase font-medium"
+          >
+            {EYEBROW_TEXT}
+          </span>
+        </div>
+
+        {/* Oversized Modern Headline */}
+        <h1
+          ref={headingRef}
+          data-hero-heading
+          id="hero-heading"
+          className="font-display text-[clamp(2.75rem,5.5vw+1rem,6.5rem)] font-bold tracking-[-0.038em] text-foreground leading-[1.02] max-w-5xl"
+        >
+          Building digital experiences that make an{" "}
+          <span
+            ref={impactRef}
+            onMouseEnter={handleImpactHover}
+            className="cursor-default text-[#D0FF35] dark:text-[#D0FF35] text-accent-highlight inline-block transition-colors"
+          >
+            impact.
+          </span>
+        </h1>
+
+        {/* Concise Professional Introduction — Sourced directly from verified profile data */}
+        <p
+          ref={copyRef}
+          data-hero-copy
+          className="max-w-2xl font-body text-[clamp(1rem,0.25vw+0.9375rem,1.125rem)] text-muted-foreground leading-relaxed font-normal mx-auto"
+        >
+          {profileData.summary}
+        </p>
+
+        {/* Action Buttons with Magnetic Hover */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2 sm:pt-4">
+          <MagneticButton data-hero-cta>
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#D0FF35] px-7 py-3.5 font-body text-sm sm:text-base font-semibold text-[#0C0C0C] shadow-sm transition-all duration-300 hover:bg-[#c2f327] hover:scale-[1.02] active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+            >
+              <span>Explore My Work</span>
+              <ArrowRight
+                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
               />
-            </div>
-            <p
-              data-hero-copy
-              className="font-heading text-2xl sm:text-3xl lg:text-4xl leading-tight font-semibold text-foreground tracking-tight"
-            >
-              Engineering digital experiences{" "}
-              <span className="text-accent-highlight font-semibold">with purpose.</span>
-            </p>
-            <p
-              data-hero-copy
-              className="font-body text-base sm:text-lg leading-relaxed text-foreground-secondary font-normal"
-            >
-              Bold typography. Minimal interfaces. Meaningful interactions.
-            </p>
-            <p
-              data-hero-copy
-              className="max-w-2xl font-body text-sm sm:text-base leading-relaxed text-muted-foreground"
-            >
-              {profileData.summary}
-            </p>
-          </div>
+            </Link>
+          </MagneticButton>
 
-          <div className="flex flex-wrap gap-2" aria-label="Core expertise">
-            {profileData.expertise.slice(0, 6).map((item) => (
-              <Badge
-                key={item}
-                data-hero-chip
-                variant="outline"
-                className="bg-card/60 px-3 py-1 text-xs"
-              >
-                {item}
-              </Badge>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <MagneticButton data-hero-cta>
-              <Link
-                href="/projects"
-                data-cursor="interactive"
-                className={buttonVariants({ variant: "default", size: "lg" })}
-              >
-                Explore my work
-                <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-              </Link>
-            </MagneticButton>
-            <div data-hero-cta>
-              <Link
-                href="/resume"
-                className={buttonVariants({ variant: "secondary", size: "lg" })}
-              >
-                View résumé
-              </Link>
-            </div>
-            <div data-hero-cta>
-              <Link
-                href="/experience"
-                className={buttonVariants({ variant: "outline", size: "lg" })}
-              >
-                <Briefcase className="size-4" aria-hidden="true" />
-                View Experience
-              </Link>
-            </div>
-            <MagneticButton data-hero-cta>
-              <Link
-                href="/contact"
-                className={buttonVariants({ variant: "ghost", size: "lg" })}
-              >
-                <Mail className="size-4" aria-hidden="true" />
-                Contact Me
-              </Link>
-            </MagneticButton>
-          </div>
+          <MagneticButton data-hero-cta>
+            <Link
+              href="/resume"
+              className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface/80 px-7 py-3.5 font-body text-sm sm:text-base font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:border-foreground/30 hover:bg-surface-elevated hover:scale-[1.02] active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+            >
+              <span>View Résumé</span>
+            </Link>
+          </MagneticButton>
         </div>
+      </div>
 
-        <div data-hero-visual className="lg:col-span-5">
-          <HeroSphereWrapper />
-        </div>
+      {/* Animated Circular Scroll-Down Indicator */}
+      <div data-hero-scroll className="flex flex-col items-center gap-2.5 pt-4 pb-2 sm:pb-4">
+        <span className="font-mono text-[10.5px] tracking-[0.24em] text-muted-foreground/80 uppercase font-medium">
+          SCROLL
+        </span>
+        <a
+          href="#statement"
+          aria-label="Scroll to professional statement section"
+          className="group flex size-9 sm:size-10 items-center justify-center rounded-full border border-border/80 bg-surface/50 text-muted-foreground transition-all duration-300 hover:border-[#D0FF35] hover:text-[#D0FF35] hover:bg-[#D0FF35]/10 outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+        >
+          <ArrowDown
+            className="size-4 transition-transform duration-300 group-hover:translate-y-0.5 animate-bounce"
+            aria-hidden="true"
+          />
+        </a>
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import { PageTransition } from "@/components/animations/page-transition";
 import { Preloader } from "@/components/animations/preloader";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { AmbientBackground } from "@/components/effects/ambient-background";
+import { FooterReveal } from "@/components/layout/footer-reveal";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { AnimationProvider } from "@/components/providers/animation-provider";
@@ -57,6 +58,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <JsonLd data={buildPersonJsonLd()} />
         <JsonLd data={buildWebSiteJsonLd()} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme")||"system";var d=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";var c=t==="system"?d:t;var el=document.documentElement;el.classList.remove("light","dark");el.classList.add(c);el.style.colorScheme=c;}catch(e){}})();`,
+          }}
+        />
       </head>
       <body
         suppressHydrationWarning
@@ -80,10 +86,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               Skip to main content
             </a>
             <SiteHeader />
-            <main id="main-content" className="flex-1">
+            <main id="main-content" className="relative z-10 flex-1 bg-background">
               <PageTransition>{children}</PageTransition>
             </main>
-            <SiteFooter />
+            <FooterReveal>
+              <SiteFooter />
+            </FooterReveal>
             {process.env.NODE_ENV === "production" && process.env.VERCEL ? (
               <>
                 <Analytics />

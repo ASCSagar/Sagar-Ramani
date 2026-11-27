@@ -27,4 +27,306 @@
   .transition-fast {
     transition-duration: 0.01ms !important;
   }
+
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation-play-state: paused !important;
+  }
+}
+
+/* ==========================================================================
+   Continuous Typography Marquee Keyframes & Animations
+   Smooth 60/120fps hardware-accelerated linear translation
+   ========================================================================== */
+
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-scroll-left 52s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  animation: marquee-scroll-right 52s linear infinite;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Selected Work Showcase Visual Preview Animations
+   Hardware-accelerated CSS keyframes for verified project interfaces
+   ========================================================================== */
+
+/* 01 TrueValue: Subtle floating bubble */
+@keyframes work-subtle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-work-float {
+  animation: work-subtle-float 4s ease-in-out infinite;
+}
+
+/* 01 TrueValue: Sequential Module Highlight */
+@keyframes work-module-pulse {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  16.6% {
+    border-color: #D0FF35;
+    color: #D0FF35;
+    background-color: rgba(208, 255, 55, 0.12);
+    box-shadow: 0 0 12px rgba(208, 255, 55, 0.25);
+  }
+  33.3% {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.animate-work-module {
+  animation: work-module-pulse 6s ease-in-out infinite;
+}
+
+/* 02 FlyOverseas: Scanning shimmer for progress bars */
+@keyframes work-bar-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%, 100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-work-shimmer {
+  animation: work-bar-shimmer 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 03 Study Streak: Audio waveform equalizer bars */
+@keyframes work-wave-bounce {
+  0%, 100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-work-wave {
+  animation: work-wave-bounce 0.9s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+/* 03 Study Streak: Waveform audio playhead sweep */
+@keyframes work-playhead-sweep {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  98% {
+    left: 100%;
+    opacity: 0;
+  }
+  100% {
+    left: 0%;
+    opacity: 0;
+  }
+}
+
+.animate-work-playhead {
+  animation: work-playhead-sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 04 Tube Master: Horizontal pipeline packet flow */
+@keyframes work-pipeline-packet {
+  0% {
+    left: 12%;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  98% {
+    left: 88%;
+    opacity: 0;
+  }
+  100% {
+    left: 12%;
+    opacity: 0;
+  }
+}
+
+.animate-work-packet {
+  animation: work-pipeline-packet 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 04 Tube Master: Pipeline node highlight sequence */
+@keyframes work-node-sequence {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  25% {
+    border-color: #D0FF35;
+    background-color: rgba(208, 255, 55, 0.12);
+    box-shadow: 0 0 14px rgba(208, 255, 55, 0.2);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.animate-work-node {
+  animation: work-node-sequence 4s ease-in-out infinite;
+}
+
+/* Generic: Radar pulse for checkmarks and AI status */
+@keyframes work-radar-ping {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.animate-work-radar {
+  animation: work-radar-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Offscreen and reduced-motion pause controller */
+.work-preview-paused,
+.work-preview-paused * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-work-float,
+  .animate-work-module,
+  .animate-work-shimmer,
+  .animate-work-wave,
+  .animate-work-playhead,
+  .animate-work-packet,
+  .animate-work-node,
+  .animate-work-radar {
+    animation-play-state: paused !important;
+    animation: none !important;
+  }
+}
+
+/* Custom VIEW and DRAG cursor target: hide native cursor on fine pointer desktop devices */
+@media (hover: hover) and (pointer: fine) {
+  [data-cursor="view"],
+  [data-cursor="view"] *,
+  [data-cursor="drag"],
+  [data-cursor="drag"] * {
+    cursor: none !important;
+  }
+}
+
+/* ==========================================================================
+   Feature 08 — Professional Experience Timeline Styling
+   ========================================================================== */
+.milestone-card .milestone-badge {
+  color: rgba(140, 140, 140, 0.45);
+  transition: color 0.35s ease;
+}
+
+.milestone-card .milestone-title {
+  color: rgba(140, 140, 140, 0.4);
+  transition: color 0.35s ease;
+}
+
+.milestone-card .milestone-meta {
+  opacity: 0.35;
+  transition: opacity 0.35s ease;
+}
+
+.milestone-card .milestone-desc {
+  opacity: 0.35;
+  transition: opacity 0.35s ease;
+}
+
+.milestone-card .milestone-techs {
+  opacity: 0.3;
+  transition: opacity 0.35s ease;
+}
+
+/* Active Highlighted State */
+.milestone-card.is-active .milestone-badge {
+  color: #D0FF35;
+}
+
+.milestone-card.is-active .milestone-title {
+  color: var(--foreground);
+}
+
+.milestone-card.is-active .milestone-meta {
+  opacity: 1;
+}
+
+.milestone-card.is-active .milestone-desc {
+  opacity: 0.88;
+}
+
+.milestone-card.is-active .milestone-techs {
+  opacity: 1;
+}
+
+/* Clean, non-glowing milestone dots along SVG curve */
+.timeline-node {
+  fill: #262626;
+  stroke: #404040;
+  stroke-width: 1.5px;
+  transition: fill 0.3s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .timeline-node {
+  fill: #1a1a1a;
+  stroke: #383838;
+}
+
+.timeline-node.is-active {
+  fill: #D0FF35 !important;
+  stroke: #0C0C0C !important;
+  stroke-width: 1.5px !important;
+  filter: none !important;
 }

@@ -39,7 +39,11 @@ class ThreeErrorBoundary extends Component<
   }
 }
 
-export function HeroSphereWrapper() {
+interface HeroSphereWrapperProps {
+  variant?: "default" | "background";
+}
+
+export function HeroSphereWrapper({ variant = "background" }: HeroSphereWrapperProps = {}) {
   const { ambientMotionPaused } = useAnimationSettings();
   const { qualityTier } = useMotionCapabilities();
   const [fallbackReason, setFallbackReason] = useState<SphereFallbackReason | null>(() => {
@@ -78,12 +82,13 @@ export function HeroSphereWrapper() {
   }, [ambientMotionPaused]);
 
   if (fallbackReason !== null) {
-    return <HeroSphereFallback reason={fallbackReason} />;
+    return <HeroSphereFallback reason={fallbackReason} variant={variant} />;
   }
 
   return (
-    <ThreeErrorBoundary fallback={<HeroSphereFallback reason="error" />}>
+    <ThreeErrorBoundary fallback={<HeroSphereFallback reason="error" variant={variant} />}>
       <EngineeringSphere
+        variant={variant}
         qualityTier={qualityTier}
         onContextError={() => setFallbackReason("webgl-unavailable")}
       />

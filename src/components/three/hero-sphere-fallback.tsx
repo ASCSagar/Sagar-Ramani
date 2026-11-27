@@ -11,6 +11,7 @@ export type SphereFallbackReason =
 
 interface HeroSphereFallbackProps {
   reason?: SphereFallbackReason;
+  variant?: "default" | "background";
 }
 
 const REASON_LABELS: Record<SphereFallbackReason, string> = {
@@ -21,7 +22,61 @@ const REASON_LABELS: Record<SphereFallbackReason, string> = {
   error: "Static architecture preview",
 };
 
-export function HeroSphereFallback({ reason = "webgl-unavailable" }: HeroSphereFallbackProps) {
+export function HeroSphereFallback({
+  reason = "webgl-unavailable",
+  variant = "default",
+}: HeroSphereFallbackProps) {
+  if (variant === "background") {
+    return (
+      <div
+        data-testid="hero-sphere-fallback"
+        data-fallback-reason={reason}
+        role="img"
+        aria-label="Architectural engineering sphere illustration representing full-stack systems"
+        className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-transparent border-0"
+      >
+        <svg
+          viewBox="0 0 280 280"
+          className="relative z-10 size-60 text-[#849E26] opacity-35"
+          aria-hidden="true"
+        >
+          <circle
+            cx="140"
+            cy="140"
+            r="98"
+            fill="none"
+            stroke="#46551C"
+            strokeWidth="1.2"
+            strokeOpacity="0.45"
+            strokeDasharray="4 4"
+          />
+          <ellipse
+            cx="140"
+            cy="140"
+            rx="116"
+            ry="42"
+            transform="rotate(-24 140 140)"
+            fill="none"
+            stroke="#CCFF33"
+            strokeWidth="1.2"
+            strokeOpacity="0.6"
+          />
+          <ellipse
+            cx="140"
+            cy="140"
+            rx="42"
+            ry="116"
+            transform="rotate(-24 140 140)"
+            fill="none"
+            stroke="#667A25"
+            strokeWidth="1.2"
+            strokeOpacity="0.45"
+          />
+        </svg>
+      </div>
+    );
+  }
+
   return (
     <div
       data-testid="hero-sphere-fallback"

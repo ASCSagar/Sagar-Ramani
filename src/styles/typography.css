@@ -1,6 +1,8 @@
 /* ==========================================================================
    PORTFOLIO DESIGN SYSTEM — TYPOGRAPHY SYSTEM
    Geist Body, Space Grotesk Headings & Display, Geist Mono Technical Labels
+   Tuned to Raglic premium standards: tight tracking, fluid clamp scaling,
+   balanced line heights, and strictly sans-serif / monospace fallbacks.
    ========================================================================== */
 
 :root {
@@ -11,18 +13,47 @@
   --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
-  /* Fluid Responsive Font Size Scale via clamp() */
-  --font-size-display: clamp(3rem, 7.5vw, 8.5rem); /* 48px – 136px */
-  --font-size-h1: clamp(2.75rem, 6vw, 6.5rem);     /* 44px – 104px */
-  --font-size-h2: clamp(2rem, 4.5vw, 4.75rem);     /* 32px – 76px */
-  --font-size-h3: clamp(1.5rem, 3vw, 3rem);        /* 24px – 48px */
-  --font-size-h4: clamp(1.125rem, 1.8vw, 1.75rem); /* 18px – 28px */
-  --font-size-body: clamp(1rem, 1.1vw, 1.125rem);  /* 16px – 18px */
-  --font-size-caption: 0.875rem;                   /* 14px */
-  --font-size-label: 0.75rem;                      /* 12px */
+  /* Premium Fluid Typography Scale Tokens via clamp() */
+  --font-size-hero: clamp(3.25rem, 5.5vw + 1rem, 7rem);           /* Hero headings: 80–112px */
+  --font-size-nav-link: clamp(2.25rem, 4.2vh, 4.5rem);            /* Full-screen navigation links: 48–72px */
+  --font-size-section: clamp(2.25rem, 3.5vw + 0.75rem, 5rem);     /* Section headings: 56–80px */
+  --font-size-subheading: clamp(1.75rem, 1.8vw + 0.75rem, 3rem);  /* Subheadings: 32–48px */
+  --font-size-card-title: clamp(1.25rem, 0.8vw + 0.65rem, 1.75rem); /* Card titles: 22–28px */
+  --font-size-body: clamp(1rem, 0.25vw + 0.9375rem, 1.125rem);    /* Body text: 16–18px */
+  --font-size-button: clamp(0.875rem, 0.2vw + 0.825rem, 1rem);    /* Buttons: 14–16px */
+  --font-size-mono-label: clamp(0.6875rem, 0.15vw + 0.65rem, 0.8125rem); /* Monospace labels: 11–13px */
+
+  /* Line Heights */
+  --line-height-hero: 1.02;
+  --line-height-nav-link: 1.06;
+  --line-height-section: 1.08;
+  --line-height-subheading: 1.18;
+  --line-height-card-title: 1.28;
+  --line-height-body: 1.65;
+  --line-height-button: 1.2;
+  --line-height-mono-label: 1.25;
+
+  /* Letter Spacing */
+  --letter-spacing-hero: -0.038em;
+  --letter-spacing-nav-link: -0.03em;
+  --letter-spacing-section: -0.03em;
+  --letter-spacing-subheading: -0.022em;
+  --letter-spacing-card-title: -0.018em;
+  --letter-spacing-body: -0.01em;
+  --letter-spacing-button: 0.01em;
+  --letter-spacing-mono-label: 0.08em;
+
+  /* Backward-compatible legacy tokens mapped to the refined scale */
+  --font-size-display: var(--font-size-hero);
+  --font-size-h1: var(--font-size-hero);
+  --font-size-h2: var(--font-size-section);
+  --font-size-h3: var(--font-size-subheading);
+  --font-size-h4: var(--font-size-card-title);
+  --font-size-caption: clamp(0.8125rem, 0.15vw + 0.75rem, 0.875rem);
+  --font-size-label: var(--font-size-mono-label);
 }
 
-/* Typography Utility Classes */
+/* Typography Font-Family Utility Classes */
 .font-display {
   font-family: var(--font-display);
 }
@@ -43,52 +74,83 @@
   font-family: var(--font-mono);
 }
 
-/* Fluid Heading Classes with refined weights and line heights */
+/* Reusable Fluid Typography Hierarchy Classes */
+
+/* Hero headings (80–112px) */
+.text-hero,
 .text-display {
   font-family: var(--font-display);
-  font-size: var(--font-size-display);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  font-size: var(--font-size-hero);
+  line-height: var(--line-height-hero);
+  letter-spacing: var(--letter-spacing-hero);
   font-weight: 700;
 }
 
-.text-h1 {
+/* Full-screen navigation links (48–72px) */
+.text-nav-link {
   font-family: var(--font-display);
-  font-size: var(--font-size-h1);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-size: var(--font-size-nav-link);
+  line-height: var(--line-height-nav-link);
+  letter-spacing: var(--letter-spacing-nav-link);
   font-weight: 700;
 }
 
+/* Section headings (56–80px) */
+.text-section,
 .text-h2 {
   font-family: var(--font-display);
-  font-size: var(--font-size-h2);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  font-size: var(--font-size-section);
+  line-height: var(--line-height-section);
+  letter-spacing: var(--letter-spacing-section);
   font-weight: 600;
 }
 
+/* Subheadings (32–48px) */
+.text-subheading,
 .text-h3 {
   font-family: var(--font-display);
-  font-size: var(--font-size-h3);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: var(--font-size-subheading);
+  line-height: var(--line-height-subheading);
+  letter-spacing: var(--letter-spacing-subheading);
   font-weight: 600;
 }
 
+/* Card titles (22–28px) */
+.text-card-title,
 .text-h4 {
-  font-family: var(--font-display);
-  font-size: var(--font-size-h4);
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-card-title);
+  line-height: var(--line-height-card-title);
+  letter-spacing: var(--letter-spacing-card-title);
   font-weight: 600;
 }
 
+/* Body text (16–18px) */
 .text-body-fluid {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
-  line-height: 1.65;
-  letter-spacing: -0.01em;
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  font-weight: 400;
+}
+
+/* Buttons (14–16px) */
+.text-button-fluid {
+  font-family: var(--font-body);
+  font-size: var(--font-size-button);
+  line-height: var(--line-height-button);
+  letter-spacing: var(--letter-spacing-button);
+  font-weight: 500;
+}
+
+/* Monospace technical labels (11–13px) */
+.text-mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono-label);
+  letter-spacing: var(--letter-spacing-mono-label);
+  line-height: var(--line-height-mono-label);
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .text-caption-fluid {
@@ -97,19 +159,32 @@
   line-height: 1.5;
 }
 
-.text-mono-label {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-label);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-  line-height: 1.25;
-}
-
 /* Outlined Display Text Utility */
 .text-outline {
   -webkit-text-stroke: 1.5px currentColor;
   color: transparent !important;
+}
+
+/* Typography Marquee Outlined Styling */
+.text-marquee-outline {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.25px rgba(12, 12, 12, 0.32);
+  transition: -webkit-text-stroke 0.25s ease;
+}
+
+.dark .text-marquee-outline {
+  -webkit-text-stroke: 1.25px rgba(242, 240, 235, 0.38);
+}
+
+@media (min-width: 1024px) {
+  .text-marquee-outline {
+    -webkit-text-stroke-width: 1.5px;
+  }
+}
+
+.text-marquee-outline:hover {
+  -webkit-text-stroke-color: rgba(208, 255, 53, 0.85);
 }
 
 /* Dynamic Accent Highlight (tuned for high contrast in both dark and light modes) */
