@@ -4,7 +4,7 @@ export const siteConfig = {
   designation: "Full Stack Software Developer",
   experienceYears: "4+ years",
   location: "Vadodara, Gujarat, India",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://sagarramani.dev",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://sagar-ramani.netlify.app",
   legacyPortfolioUrl: "https://sagar-ramani.netlify.app/",
   email: "sagar.18beceg081@gmail.com",
   social: {

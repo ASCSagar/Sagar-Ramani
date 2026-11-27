@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -22,25 +23,25 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.designation}`,
+    default: `${siteConfig.name} | ${siteConfig.designation}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: profileData.summary,
   openGraph: {
-    title: `${siteConfig.name} — ${siteConfig.designation}`,
+    title: `${siteConfig.name} | ${siteConfig.designation}`,
     description: profileData.summary,
     url: siteConfig.siteUrl,
-    siteName: `${siteConfig.name} — Portfolio`,
+    siteName: `${siteConfig.name} | Portfolio`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.designation}`,
+    title: `${siteConfig.name} | ${siteConfig.designation}`,
     description: profileData.summary,
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
@@ -48,9 +49,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className="h-full antialiased font-sans"
     >
       <head>
-        <JsonLd data={[buildPersonJsonLd(), buildWebSiteJsonLd()]} />
+        <JsonLd data={buildPersonJsonLd()} />
+        <JsonLd data={buildWebSiteJsonLd()} />
       </head>
-      <body className="flex min-h-full flex-col bg-background text-foreground">
+      <body
+        suppressHydrationWarning
+        className="flex min-h-full flex-col bg-background text-foreground"
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

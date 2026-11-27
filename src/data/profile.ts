@@ -92,11 +92,11 @@ export const profileData: ProfileData = {
   ],
   aboutNarrative: {
     careerOverview:
-      "Over 4+ years in software engineering across La Net Team (Surat), Anant Soft Computing (Vadodara), and ETD, I have progressed from Software Developer Trainee to Full Stack Developer Grade 2—delivering production web applications, multi-module SaaS ecosystems, and automated data workflows.",
+      "Over 4+ years in software engineering across La Net Team (Surat), Anant Soft Computing (Vadodara), and ETD, I have progressed from Software Developer Trainee to Full Stack Developer Grade 2, delivering production web applications, multi-module SaaS ecosystems, and automated data workflows.",
     fullStackExpertise:
-      "I work across the full application lifecycle using TypeScript, JavaScript, React, Next.js, Node.js, Express.js, Python, and Django—aligning UI architecture with reliable backend services and structured database persistence in PostgreSQL, MongoDB, and MySQL.",
+      "I work across the full application lifecycle using TypeScript, JavaScript, React, Next.js, Node.js, Express.js, Python, and Django, aligning UI architecture with reliable backend services and structured database persistence in PostgreSQL, MongoDB, and MySQL.",
     frontendExpertise:
-      "My frontend engineering background centers on React, Next.js, Redux, Redux Toolkit, React Hooks, Tailwind CSS, Material UI, and Bootstrap—translating complex workflows such as multi-section assessments, ERP dashboards, and responsive storefronts into maintainable component trees.",
+      "My frontend engineering background centers on React, Next.js, Redux, Redux Toolkit, React Hooks, Tailwind CSS, Material UI, and Bootstrap, translating complex workflows such as multi-section assessments, ERP dashboards, and responsive storefronts into maintainable component trees.",
     backendExpertise:
       "On the backend, I build REST APIs, Django REST Framework services, Node.js/Express endpoints, GraphQL/Hasura integrations, webhooks, and role-based access control (JWT, OAuth, RBAC) backed by relational and NoSQL databases.",
     enterpriseExperience:
@@ -104,7 +104,7 @@ export const profileData: ProfileData = {
     aiAutomationExperience:
       "My work at ETD includes AI-enabled web experiences (FlyOverseas.ai), conversational chatbot workflows (FlyOverseas Intelligent Chatbot), and automated job data aggregation pipelines using Python, OpenAI API integrations, and Playwright automation.",
     developmentPhilosophy:
-      "I prioritize readable, modular code, strict type boundaries, predictable data flow, and honest engineering documentation—preferring clean architecture and accessible interfaces over unnecessary complexity.",
+      "I prioritize readable, modular code, strict type boundaries, predictable data flow, and honest engineering documentation, preferring clean architecture and accessible interfaces over unnecessary complexity.",
   },
   resumeVersions: [
     {

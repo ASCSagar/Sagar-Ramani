@@ -174,4 +174,10 @@
     break-inside: avoid;
     box-shadow: none !important;
   }
+
+  .pin-spacer {
+    height: auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
 }

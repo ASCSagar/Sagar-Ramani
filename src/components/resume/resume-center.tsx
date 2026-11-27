@@ -199,7 +199,7 @@ export function ResumeCenter({ versions, projectsBySlug }: ResumeCenterProps) {
         </div>
       </section>
 
-      {/* PDF Preview Panel — only rendered when an approved PDF exists and is selected */}
+      {/* PDF Preview Panel: only rendered when an approved PDF exists and is selected */}
       <AnimatePresence>
         {previewVersion && previewVersion.pdfPath ? (
           <motion.div

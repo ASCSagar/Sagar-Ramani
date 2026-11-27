@@ -51,7 +51,7 @@ export default function EducationPage() {
                     <div className="space-y-1">
                       <CardTitle className="text-xl">
                         {entry.degree}
-                        {entry.specialization ? ` — ${entry.specialization}` : ""}
+                        {entry.specialization ? ` (${entry.specialization})` : ""}
                       </CardTitle>
                       <CardDescription className="text-sm font-medium text-foreground/85">
                         {entry.institution}
@@ -84,7 +84,7 @@ export default function EducationPage() {
           ))}
         </StaggerReveal>
 
-        {/* Certifications — Only display verified entries */}
+        {/* Certifications: Only display verified entries */}
         <ScrollReveal>
           <Card className="border-border/80 bg-card/60">
             <CardHeader>

@@ -238,7 +238,7 @@ export function ParallaxImage({
 
   return (
     <div ref={wrapperRef} className={cn("overflow-hidden", className)}>
-      <div ref={innerRef} className="h-full w-full">
+      <div ref={innerRef} className="relative h-full w-full">
         {children}
       </div>
     </div>

@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Pause, Play } from "lucide-react";
+import { Menu } from "lucide-react";
 import { motion } from "motion/react";
 
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { useAnimationSettings } from "@/components/providers/animation-provider";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -32,8 +32,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { ambientMotionPaused, prefersReducedMotion, shouldReduceMotion, toggleAmbientMotion } =
-    useAnimationSettings();
+  const { shouldReduceMotion } = useAnimationSettings();
 
   useEffect(() => {
     const onScroll = () => {
@@ -108,26 +107,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          {!prefersReducedMotion ? (
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-sm"
-              onClick={toggleAmbientMotion}
-              aria-pressed={ambientMotionPaused}
-              aria-label={ambientMotionPaused ? "Resume decorative motion" : "Pause decorative motion"}
-              title={ambientMotionPaused ? "Resume decorative motion" : "Pause decorative motion"}
-              data-testid="ambient-motion-toggle"
-              className="rounded-full"
-            >
-              {ambientMotionPaused ? (
-                <Play className="size-3.5 text-primary" aria-hidden="true" />
-              ) : (
-                <Pause className="size-3.5 text-muted-foreground" aria-hidden="true" />
-              )}
-            </Button>
-          ) : null}
-
           <ThemeToggle />
 
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>

@@ -29,6 +29,13 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
         <p className="mt-3 max-w-md text-sm leading-relaxed text-[#A1A1AA]">
           A critical rendering error occurred. Please reload the application or return to the main portfolio.
         </p>
+        {error ? (
+          <div className="mt-4 max-w-xl overflow-auto rounded-lg border border-red-500/20 bg-red-950/40 p-4 text-left font-mono text-xs text-red-300">
+            <p className="font-semibold text-red-200">{error.message || "Unknown error"}</p>
+            {error.digest ? <p className="mt-1 text-[11px] text-red-400">Digest: {error.digest}</p> : null}
+            {error.stack ? <pre className="mt-2 text-[10px] whitespace-pre-wrap text-red-300/80">{error.stack}</pre> : null}
+          </div>
+        ) : null}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"

@@ -3,11 +3,12 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Cpu, ExternalLink, Layers, Workflow } from "lucide-react";
+import { ArrowRight, ExternalLink, Layers } from "lucide-react";
 
 import { SplitTextReveal } from "@/components/animations/split-text-reveal";
 import { SpotlightCard } from "@/components/effects/spotlight-card";
 import { useAnimationSettings } from "@/components/providers/animation-provider";
+import { ConceptualPreview } from "@/components/shared/conceptual-preview";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { MOTION_EASES } from "@/config/motion";
@@ -134,35 +135,46 @@ export function HorizontalProjectShowcase({ items }: HorizontalProjectShowcasePr
         </div>
 
         {/* Desktop horizontal scroll track / Mobile & Reduced-motion responsive grid */}
-        <div ref={viewportRef} className="relative lg:overflow-hidden rounded-2xl">
+        <div
+          ref={viewportRef}
+          className={cn(
+            "relative rounded-2xl",
+            shouldReduceMotion ? "lg:overflow-visible" : "lg:overflow-hidden"
+          )}
+        >
           {/* Subtle edge fades on desktop for smooth horizontal entrance and exit */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-10 bg-gradient-to-r from-background via-background/60 to-transparent lg:block"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-16 bg-gradient-to-l from-background via-background/60 to-transparent lg:block"
-          />
+          {!shouldReduceMotion ? (
+            <>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-10 bg-gradient-to-r from-background via-background/60 to-transparent lg:block"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-16 bg-gradient-to-l from-background via-background/60 to-transparent lg:block"
+              />
+            </>
+          ) : null}
 
           <div
             ref={trackRef}
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:flex lg:w-max lg:flex-nowrap lg:gap-6 py-2 px-1"
+            className={cn(
+              "grid grid-cols-1 gap-6 md:grid-cols-2 py-2 px-1",
+              shouldReduceMotion
+                ? "lg:grid lg:grid-cols-3 lg:w-auto"
+                : "lg:flex lg:w-max lg:flex-nowrap lg:gap-6"
+            )}
           >
             {items.map(({ project, moduleCount }, index) => {
-              const Icon =
-                project.kind === "platform"
-                  ? Layers
-                  : project.kind === "service"
-                  ? Workflow
-                  : Cpu;
-
               return (
                 <div
                   key={project.slug}
                   data-cursor="project"
                   data-cursor-label="View"
-                  className="w-full lg:w-[420px] lg:shrink-0"
+                  className={cn(
+                    "w-full",
+                    shouldReduceMotion ? "lg:w-auto" : "lg:w-[420px] lg:shrink-0"
+                  )}
                 >
                   <SpotlightCard className="flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card/70 transition-all duration-300 hover:border-primary/50 hover:shadow-md">
                     <div className="flex h-full flex-col justify-between">
@@ -180,33 +192,7 @@ export function HorizontalProjectShowcase({ items }: HorizontalProjectShowcasePr
                               />
                             </div>
                           ) : (
-                            <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/70 bg-gradient-to-br from-primary/15 via-background to-accent-secondary/15 p-4 flex items-center justify-center">
-                              <div
-                                aria-hidden="true"
-                                className="pointer-events-none absolute inset-0 opacity-25"
-                                style={{
-                                  backgroundImage:
-                                    "radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0)",
-                                  backgroundSize: "16px 16px",
-                                }}
-                              />
-                              <div className="absolute top-3.5 left-3.5 z-10">
-                                <Badge
-                                  variant="outline"
-                                  className="border-border/80 bg-background/85 font-mono text-[10px] tracking-wider uppercase text-muted-foreground backdrop-blur-xs"
-                                >
-                                  Conceptual Preview
-                                </Badge>
-                              </div>
-                              <div className="relative z-10 flex flex-col items-center gap-1.5 text-center">
-                                <div className="flex size-11 items-center justify-center rounded-xl border border-primary/30 bg-background/90 text-primary shadow-xs backdrop-blur-xs transition-transform duration-300 group-hover/spotlight:scale-105">
-                                  <Icon className="size-5" aria-hidden="true" />
-                                </div>
-                                <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
-                                  {project.category}
-                                </span>
-                              </div>
-                            </div>
+                            <ConceptualPreview project={project} compact />
                           )}
 
                           {/* Index Badge cleanly placed in top right */}

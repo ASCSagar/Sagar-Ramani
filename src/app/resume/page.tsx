@@ -171,7 +171,7 @@ export default function ResumePage() {
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <p className="text-xs font-semibold text-foreground">
                         {edu.degree}
-                        {edu.specialization ? ` — ${edu.specialization}` : ""}
+                        {edu.specialization ? ` (${edu.specialization})` : ""}
                       </p>
                       <Badge variant="outline" className="text-[10px]">
                         {edu.grade}

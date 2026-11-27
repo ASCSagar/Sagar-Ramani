@@ -72,7 +72,7 @@ export interface ProjectEntry {
 
 export const projectsData: ProjectEntry[] = [
   // =========================================================================
-  // ETD — TrueValue Platform & Grouped Modules (1–7)
+  // ETD: TrueValue Platform & Grouped Modules (1–7)
   // =========================================================================
   {
     id: "proj-truevalue-platform",
@@ -230,7 +230,7 @@ export const projectsData: ProjectEntry[] = [
   },
 
   // =========================================================================
-  // ETD — AI Products & Supporting Services (8–10)
+  // ETD: AI Products & Supporting Services (8–10)
   // =========================================================================
   {
     id: "proj-flyoverseas-ai",
@@ -291,7 +291,7 @@ export const projectsData: ProjectEntry[] = [
   },
 
   // =========================================================================
-  // Anant Soft Computing — Published Applications (11, 20)
+  // Anant Soft Computing: Published Applications (11, 20)
   // =========================================================================
   {
     id: "proj-study-streak",
@@ -370,7 +370,7 @@ export const projectsData: ProjectEntry[] = [
   },
 
   // =========================================================================
-  // La Net Team — Published Applications (23, 24)
+  // La Net Team: Published Applications (23, 24)
   // =========================================================================
   {
     id: "proj-pabau",
@@ -451,7 +451,7 @@ export const projectsData: ProjectEntry[] = [
   },
 
   // =========================================================================
-  // Draft Records — Unverified Details Excluded from Public Routes & Sitemap
+  // Draft Records: Unverified Details Excluded from Public Routes & Sitemap
   // =========================================================================
   {
     id: "proj-pawppy",

@@ -35,28 +35,14 @@ test.describe("Portfolio V2 Phase 4 Animations & Interactive 3D", () => {
     ).toBeInViewport();
   });
 
-  test("ambient motion pause control pauses 3D sphere and persists across routes", async ({
+  test("ambient motion pause toggle is removed from site header", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/", { waitUntil: "load" });
 
     const toggle = page.getByTestId("ambient-motion-toggle");
-    await expect(toggle).toBeVisible();
-    await expect(toggle).toHaveAttribute("aria-pressed", "false");
-
-    await toggle.click();
-    await expect(toggle).toHaveAttribute("aria-pressed", "true");
-
-    const fallback = page.getByTestId("hero-sphere-fallback");
-    await expect(fallback).toBeVisible();
-    await expect(fallback).toHaveAttribute("data-fallback-reason", "paused");
-
-    await page.goto("/skills", { waitUntil: "load" });
-    await expect(page.getByTestId("ambient-motion-toggle")).toHaveAttribute(
-      "aria-pressed",
-      "true"
-    );
+    await expect(toggle).toHaveCount(0);
   });
 
   test("technology orbit on skills and marquee on home support domain selection and pause controls", async ({

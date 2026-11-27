@@ -9,6 +9,7 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
   useSyncExternalStore,
 } from "react";
 import type { ReactNode } from "react";
@@ -20,26 +21,6 @@ import { SCROLL_TRIGGER_DEFAULTS } from "@/config/motion";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const AMBIENT_PAUSE_STORAGE_KEY = "portfolio-v2-ambient-motion-paused";
-const AMBIENT_CHANGE_EVENT = "portfolio-ambient-motion-change";
-
-function subscribeAmbientStore(callback: () => void): () => void {
-  if (typeof window === "undefined") return () => {};
-  window.addEventListener("storage", callback);
-  window.addEventListener(AMBIENT_CHANGE_EVENT, callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener(AMBIENT_CHANGE_EVENT, callback);
-  };
-}
-
-function getAmbientSnapshot(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.localStorage.getItem(AMBIENT_PAUSE_STORAGE_KEY) === "true";
-  } catch {
-    return false;
-  }
-}
 
 function getAmbientServerSnapshot(): boolean {
   return false;
@@ -129,26 +110,25 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
     getReducedMotionSnapshot,
     getAmbientServerSnapshot
   );
-  const ambientMotionPaused = useSyncExternalStore(
-    subscribeAmbientStore,
-    getAmbientSnapshot,
-    getAmbientServerSnapshot
-  );
+  const [ambientMotionPaused, setAmbientMotionPausedState] = useState(false);
 
   const setAmbientMotionPaused = useCallback((paused: boolean) => {
+    setAmbientMotionPausedState(paused);
+  }, []);
+
+  const toggleAmbientMotion = useCallback(() => {
+    setAmbientMotionPausedState((prev) => !prev);
+  }, []);
+
+  const shouldReduceMotion = prefersReducedMotion || ambientMotionPaused;
+
+  useEffect(() => {
     try {
-      window.localStorage.setItem(AMBIENT_PAUSE_STORAGE_KEY, String(paused));
-      window.dispatchEvent(new Event(AMBIENT_CHANGE_EVENT));
+      window.localStorage.removeItem(AMBIENT_PAUSE_STORAGE_KEY);
     } catch {
       // Ignore storage access errors.
     }
   }, []);
-
-  const toggleAmbientMotion = useCallback(() => {
-    setAmbientMotionPaused(!ambientMotionPaused);
-  }, [ambientMotionPaused, setAmbientMotionPaused]);
-
-  const shouldReduceMotion = prefersReducedMotion || ambientMotionPaused;
 
   useEffect(() => {
     document.documentElement.dataset.ambientMotion = ambientMotionPaused ? "paused" : "active";

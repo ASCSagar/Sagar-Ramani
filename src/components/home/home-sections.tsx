@@ -148,7 +148,7 @@ export function HomeSections() {
             <ParallaxImage className="relative aspect-[4/3] w-full bg-muted">
               <Image
                 src={profileData.aboutImage}
-                alt={`${profileData.name} — ${profileData.designation}`}
+                alt={`${profileData.name}, ${profileData.designation}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"
@@ -328,7 +328,7 @@ export function HomeSections() {
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <p className="font-heading text-sm font-semibold text-foreground">
                         {edu.degree}
-                        {edu.specialization ? ` — ${edu.specialization}` : ""}
+                        {edu.specialization ? ` (${edu.specialization})` : ""}
                       </p>
                       <Badge variant="outline" className="border-primary/30 text-xs text-primary">
                         {edu.scoreLabel}: {edu.grade}
@@ -415,7 +415,7 @@ export function HomeSections() {
         </ScrollReveal>
       </section>
 
-      {/* Testimonials — strictly gated behind showTestimonials && verifiedForPublication */}
+      {/* Testimonials: strictly gated behind showTestimonials && verifiedForPublication */}
       {visibleTestimonials.length > 0 ? (
         <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading

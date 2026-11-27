@@ -38,7 +38,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata = buildPageMetadata({
   title: "About",
-  description: `About ${profileData.name} — ${profileData.designation} with ${profileData.experience} of full-stack software development experience in Vadodara, Gujarat, India.`,
+  description: `About ${profileData.name}, ${profileData.designation} with ${profileData.experience} of full-stack software development experience in Vadodara, Gujarat, India.`,
   path: "/about",
 });
 
@@ -94,7 +94,7 @@ export default function AboutPage() {
               <ParallaxImage className="relative aspect-[4/3] w-full bg-muted">
                 <Image
                   src={profileData.aboutImage}
-                  alt={`${profileData.name} — ${profileData.designation}`}
+                  alt={`${profileData.name}, ${profileData.designation}`}
                   fill
                   loading="eager"
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -308,7 +308,7 @@ export default function AboutPage() {
                 >
                   <p className="font-heading text-sm font-semibold text-foreground">
                     {edu.degree}
-                    {edu.specialization ? ` — ${edu.specialization}` : ""}
+                    {edu.specialization ? ` (${edu.specialization})` : ""}
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">{edu.institution}</p>
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-2">

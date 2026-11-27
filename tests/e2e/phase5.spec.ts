@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { siteConfig } from "@/data/site-config";
+
 test.describe("Portfolio V2 Phase 5 Production Integrations, SEO, Security & Performance", () => {
   test("security headers are present on public HTML responses", async ({ request }) => {
     const response = await request.get("/");
@@ -28,16 +30,16 @@ test.describe("Portfolio V2 Phase 5 Production Integrations, SEO, Security & Per
     expect(robotsText).toMatch(/user-agent:\s*\*/i);
     expect(robotsText).toMatch(/allow:\s*\//i);
     expect(robotsText).toMatch(/disallow:\s*\/api\//i);
-    expect(robotsText).toMatch(/sitemap:\s*https:\/\/sagarramani\.dev\/sitemap\.xml/i);
+    expect(robotsText.toLowerCase()).toContain(`sitemap: ${siteConfig.siteUrl.toLowerCase()}/sitemap.xml`);
 
     // sitemap.xml
     const sitemapRes = await request.get("/sitemap.xml");
     expect(sitemapRes.status()).toBe(200);
     const sitemapText = await sitemapRes.text();
     expect(sitemapText).toContain("<urlset");
-    expect(sitemapText).toContain("<loc>https://sagarramani.dev/</loc>");
-    expect(sitemapText).toContain("<loc>https://sagarramani.dev/projects</loc>");
-    expect(sitemapText).toContain("<loc>https://sagarramani.dev/projects/truevalue-platform</loc>");
+    expect(sitemapText).toContain(`<loc>${siteConfig.siteUrl}/</loc>`);
+    expect(sitemapText).toContain(`<loc>${siteConfig.siteUrl}/projects</loc>`);
+    expect(sitemapText).toContain(`<loc>${siteConfig.siteUrl}/projects/truevalue-platform</loc>`);
     // Draft project must be excluded
     expect(sitemapText).not.toContain("makemyforte");
     expect(sitemapText).not.toContain("/api/");
@@ -86,7 +88,7 @@ test.describe("Portfolio V2 Phase 5 Production Integrations, SEO, Security & Per
     expect(personSchema).toBeDefined();
     expect(personSchema?.name).toBe("Sagar Ramani");
     expect(personSchema?.jobTitle).toBe("Full Stack Software Developer");
-    expect(personSchema?.url).toBe("https://sagarramani.dev");
+    expect(personSchema?.url).toBe(siteConfig.siteUrl);
     expect(personSchema?.sameAs).toContain("https://github.com/SagarIR");
     expect(personSchema?.sameAs).toContain("https://www.linkedin.com/in/sagar-ramani/");
 

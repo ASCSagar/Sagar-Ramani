@@ -10,7 +10,7 @@ export const size = {
 
 export const contentType = "image/png";
 
-export const alt = `${profileData.name} — ${profileData.designation}`;
+export const alt = `${profileData.name} | ${profileData.designation}`;
 
 export default function OpenGraphImage() {
   return new ImageResponse(

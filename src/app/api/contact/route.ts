@@ -217,7 +217,7 @@ export async function POST(request: Request) {
       from: fromEmail,
       to: [toEmail],
       replyTo: sanitizedEmail,
-      subject: `[Portfolio V2] ${sanitizedPurpose} — ${sanitizedName}`,
+      subject: `[Portfolio V2] ${sanitizedPurpose} | ${sanitizedName}`,
       text: textAlternative,
       html: htmlContent,
     });

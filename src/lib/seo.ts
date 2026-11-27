@@ -70,7 +70,7 @@ export function buildPageMetadata({
       title: `${title} | ${siteConfig.name}`,
       description,
       url: canonicalUrl,
-      siteName: `${siteConfig.name} — Portfolio`,
+      siteName: `${siteConfig.name} | Portfolio`,
       locale: "en_US",
       type: ogType,
       images: [
@@ -78,7 +78,7 @@ export function buildPageMetadata({
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: `${title} — ${siteConfig.name}`,
+          alt: `${title} | ${siteConfig.name}`,
         },
       ],
     },
@@ -125,7 +125,7 @@ export function buildWebSiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: `${siteConfig.name} — ${siteConfig.designation}`,
+    name: `${siteConfig.name} | ${siteConfig.designation}`,
     url: siteConfig.siteUrl,
     description: profileData.summary,
     inLanguage: "en-US",
@@ -141,7 +141,7 @@ export function buildProfilePageJsonLd(path = "/about") {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     url: `${siteConfig.siteUrl}${path}`,
-    name: `About ${profileData.name} — ${profileData.designation}`,
+    name: `About ${profileData.name} | ${profileData.designation}`,
     description: profileData.summary,
     mainEntity: buildPersonJsonLd(),
   };

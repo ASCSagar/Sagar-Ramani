@@ -23,7 +23,7 @@ export default function NotFound() {
         </div>
       </div>
 
-      <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">404 — Not Found</p>
+      <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">404: Not Found</p>
       <SplitTextReveal
         as="h1"
         text="Page Could Not Be Found"

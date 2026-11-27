@@ -17,7 +17,7 @@ export default function SkillsPage() {
       <PageHeader
         eyebrow="Capabilities"
         title="Technical Skills"
-        description="Structured capability matrix distinguishing production hands-on experience, working knowledge, and technologies currently being explored—without arbitrary percentage bars."
+        description="Structured capability matrix distinguishing production hands-on experience, working knowledge, and technologies currently being explored, without arbitrary percentage bars."
       />
 
       <div className="space-y-10">
