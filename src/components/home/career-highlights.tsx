@@ -8,7 +8,6 @@ import {
   experienceData,
   getTotalCareerDurationFormatted,
 } from "@/data/experience";
-import { profileData } from "@/data/profile";
 import { getPublishedProjects } from "@/data/projects";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 

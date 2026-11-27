@@ -8,8 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useAnimationSettings } from "@/components/providers/animation-provider";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/social-icons";
 import { siteConfig } from "@/data/site-config";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { cn } from "@/lib/utils";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 // Dynamically import 3D blob to ensure client-only canvas execution
 const ContactBlob3D = dynamic(

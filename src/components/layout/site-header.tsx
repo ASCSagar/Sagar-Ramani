@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, BookOpen, Briefcase, Code2, FileText, GraduationCap, Layers, Mail, Sparkles, X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { ThemeToggle } from "@/components/layout/theme-toggle";
@@ -529,7 +529,7 @@ function ContactVisual() {
 
       <div className="my-auto py-3 space-y-3">
         <div className="rounded-2xl border border-white/10 bg-black/50 p-4 font-mono text-xs space-y-1.5 text-white/80">
-          <div className="text-emerald-400">$ connect --identity="sagar-ramani"</div>
+          <div className="text-emerald-400">$ connect --identity=&quot;sagar-ramani&quot;</div>
           <div className="text-white/60">&gt; Role: Full Stack Software Developer</div>
           <div className="text-white/60">&gt; Location: Vadodara, Gujarat, India</div>
           <div className="text-white/60">&gt; Direct Email: sagar.18beceg081@gmail.com</div>
@@ -587,8 +587,14 @@ function PreviewVisual({ route }: { route: string }) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setMenuOpen(false);
+    setHoveredHref(null);
+  }
+  const [scrolled, setScrolled] = useState(false);
   const { shouldReduceMotion } = useAnimationSettings();
   const textRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
@@ -601,12 +607,6 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Close overlay on route changes
-  useEffect(() => {
-    setMenuOpen(false);
-    setHoveredHref(null);
-  }, [pathname]);
 
   // Close overlay on Escape key
   useEffect(() => {

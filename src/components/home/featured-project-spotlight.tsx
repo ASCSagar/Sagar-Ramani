@@ -2,12 +2,11 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Box, CheckCircle2, Layers } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { useAnimationSettings } from "@/components/providers/animation-provider";
 import { getProjectBySlug } from "@/data/projects";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { cn } from "@/lib/utils";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const truevalueProject = getProjectBySlug("truevalue-platform")!;
 

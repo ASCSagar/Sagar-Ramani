@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -163,24 +163,24 @@ interface BlobMeshProps {
 
 function BlobMesh({ pointerPosition, isPointerActive, isVisible }: BlobMeshProps) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const uniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uDisplacement: { value: 0.22 }, // Controlled soft deformation to prevent clipping
-      uFrequency: { value: 0.95 },
-      uColorBase: { value: new THREE.Color("#D0FF35") },
-      uColorShadow: { value: new THREE.Color("#32420F") },
-      uColorHighlight: { value: new THREE.Color("#F4FF80") },
-    }),
-    []
-  );
+  const [uniforms] = useState(() => ({
+    uTime: { value: 0 },
+    uDisplacement: { value: 0.22 }, // Controlled soft deformation to prevent clipping
+    uFrequency: { value: 0.95 },
+    uColorBase: { value: new THREE.Color("#D0FF35") },
+    uColorShadow: { value: new THREE.Color("#32420F") },
+    uColorHighlight: { value: new THREE.Color("#F4FF80") },
+  }));
 
   useFrame((_, delta) => {
     if (!isVisible) return;
 
     // Smooth ambient morphing
-    uniforms.uTime.value += delta * 0.65;
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value += delta * 0.65;
+    }
 
     if (meshRef.current) {
       // Gentle continuous ambient rotation
@@ -189,7 +189,6 @@ function BlobMesh({ pointerPosition, isPointerActive, isVisible }: BlobMeshProps
 
       // Subtle desktop pointer tilt tracking with smooth damping
       const targetRotX = isPointerActive ? -pointerPosition.y * 0.25 : 0;
-      const targetRotY = isPointerActive ? pointerPosition.x * 0.25 : 0;
 
       meshRef.current.rotation.x = THREE.MathUtils.lerp(
         meshRef.current.rotation.x,
@@ -213,6 +212,7 @@ function BlobMesh({ pointerPosition, isPointerActive, isVisible }: BlobMeshProps
     <mesh ref={meshRef} position={[0, 0, 0]} scale={1.05}>
       <icosahedronGeometry args={[1.05, 64]} />
       <shaderMaterial
+        ref={materialRef}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
@@ -227,13 +227,12 @@ export function ContactBlob3D() {
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [isPointerActive, setIsPointerActive] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [hasWebGL, setHasWebGL] = useState(true);
 
   const { shouldReduceMotion } = useAnimationSettings();
-
-  useEffect(() => {
-    setHasWebGL(detectWebGLSupport() && !prefersReducedMotion() && !shouldReduceMotion);
-  }, [shouldReduceMotion]);
+  const hasWebGL =
+    typeof window !== "undefined"
+      ? detectWebGLSupport() && !prefersReducedMotion() && !shouldReduceMotion
+      : true;
 
   useEffect(() => {
     const container = containerRef.current;

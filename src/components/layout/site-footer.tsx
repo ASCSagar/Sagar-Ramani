@@ -6,7 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 
 import { useAnimationSettings } from "@/components/providers/animation-provider";
 import { siteConfig } from "@/data/site-config";
-import { cn } from "@/lib/utils";
 
 export function SiteFooter() {
   const footerRef = useRef<HTMLElement>(null);

@@ -2,8 +2,6 @@
 
 import * as React from "react";
 
-type Theme = "dark" | "light" | "system";
-
 export interface UseThemeProps {
   theme: string | undefined;
   setTheme: (theme: string) => void;

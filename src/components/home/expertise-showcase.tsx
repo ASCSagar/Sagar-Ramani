@@ -4,10 +4,8 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  Bot,
   CheckCircle2,
   Code2,
-  Cpu,
   Database,
   Globe,
   Layers,
@@ -15,7 +13,6 @@ import {
   Server,
   ShieldCheck,
   Workflow,
-  Zap,
 } from "lucide-react";
 
 import { useAnimationSettings } from "@/components/providers/animation-provider";
